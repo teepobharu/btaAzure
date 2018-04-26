@@ -91,8 +91,9 @@ export class PlaceDetailComponent implements OnInit {
   validate() {
       this.serverService.valPlace(this.route.snapshot.paramMap.get('id'))
       .subscribe((res) => {
-        alert('This place is validated.')}
+        alert('This place is validated.');
         this.router.navigate(['/admin/places']);
+      }
       );
   }
 
@@ -103,8 +104,9 @@ export class PlaceDetailComponent implements OnInit {
   delete () {
       this.serverService.valPlace(this.route.snapshot.paramMap.get('id'))
       .subscribe((res) => {
-        alert('This place is deleted.')}
+        alert('This place is deleted.');
         this.router.navigate(['/admin/places']);
+      }
       );
   }
 

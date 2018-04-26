@@ -8,8 +8,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./admin-places.component.css']
 })
 export class AdminPlacesComponent implements OnInit {
-	places = '';
-	imageData = '';
+	places: any[];
+	imageData: any;
   constructor(
     private serverService: ServerService,
     private sanitizer: DomSanitizer,) { }
