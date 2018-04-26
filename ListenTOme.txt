@@ -1,0 +1,11 @@
+Installation guide:
+
+form:
+1. run terminal
+2. type npm install
+
+server:
+1. run terminal
+2. run npm install mysql
+
+Enjoy!
