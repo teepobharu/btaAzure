@@ -1,0 +1,7 @@
+blockquote, blockquote p {
+    font-size: 15px;
+}
+agm-map{
+  height: 400px;
+  width: 100%;
+}

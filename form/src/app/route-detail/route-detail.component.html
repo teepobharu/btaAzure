@@ -1,0 +1,43 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+
+		<div class="col inline" *ngFor="let place of route; index as i;">
+  			<!-- <div class="row">
+  				<p style="font-size: 30px; color: #444444; margin-left: 92px;">{{place.time}}</p>
+  			</div> -->
+			<div class="col-sm-12" style="margin-bottom: 5px">
+	          <a routerLink="/detail/{{ place.attID }}">
+	            <div class="col-sm-4">
+	                <img [src]="place.img" style="width: 100%;">
+	                <i class="material-icons" style="margin: 15px 0px 0px 94px;">arrow_downward</i>
+	            </div>
+	          </a>
+	            <div class="col-sm-8" style="margin-top: -10px">
+	  				<div class="row">
+	  					<div class="col-sm-10">
+			              <a routerLink="/detail/{{ place.attID }}">
+			                <h3 style="/*position: absolute; */text-align: left;">{{place.time}}. {{ place.name }}</h3>
+			                <!-- <img [src]="place.img" style="width: 100%;"> -->
+			              </a>
+			            </div>
+			            <div class="col-sm-2">
+			              <button class="btn btn-danger" type="button" style="margin: 16px 5px 0px 0px" (click)="modifyPlace(i)"> Change </button>
+			          	</div>
+			        </div>
+	              
+	                <p style="line-height: 25px; height: 75px; overflow: hidden; text-overflow: ellipsis">{{ place.description }}</p>
+	            </div>
+        	</div>
+			<div *ngIf="isModify[i]" class="col-sm-12" style="background-color: #ddd; border-radius: 10px; padding-bottom: 14px; margin-bottom: 20px;">
+				<div class="col inline" *ngFor="let relatedPlace of temp; index as j">
+					<button class="btn btn-basic" type="button" style="margin: 16px 5px 0px 0px" (click)="choosePlace(i, j)"> {{relatedPlace.name}} </button>
+				</div>
+			</div>
+		</div>
+
+		<button class="btn btn-success" type="button" style="margin: 0px 0px 100px 30px; font-size: 28px;" (click)="ExportPDF"> Export as PDF</button>
+		<hr>
+	</div>
+</div>

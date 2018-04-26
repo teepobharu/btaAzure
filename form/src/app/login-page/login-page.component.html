@@ -1,0 +1,26 @@
+<script defer src="https://apis.google.com/js/platform.js"></script>
+<div class="justify-content-center">
+</div>
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-sm-5">
+    </div>
+    <div class="col-sm-2">
+		<google-signin
+		  [clientId]="myClientId"
+		  [width]="myWidth"
+		  [theme]="myTheme"
+		  [scope]="myScope"
+		  [longTitle]="myLongTitle"
+		  (googleSignInSuccess)="onGoogleSignInSuccess($event)"
+		  (click)="signIn()">
+		</google-signin>
+		<button class="btn btn-link" 
+	        	type="submit" 
+	        	(click)="signOut()">Sign out</button>
+	</div>
+    <div class="col-sm-5">
+    </div>
+</div>
