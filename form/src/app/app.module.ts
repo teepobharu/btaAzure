@@ -29,6 +29,7 @@ import { RouteDetailComponent } from './route-detail/route-detail.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GiveFeedbackComponent } from './give-feedback/give-feedback.component';
 import { EditPlaceComponent } from './edit-place/edit-place.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { EditPlaceComponent } from './edit-place/edit-place.component';
     ProfileComponent,
     GiveFeedbackComponent,
     EditPlaceComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,

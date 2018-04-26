@@ -8,3 +8,13 @@ input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
 input.ng-valid.ng-touched, select.ng-valid.ng-touched {
   border: 1px green solid;
 }
+
+.dropdown-submenu {
+    position: relative;
+}
+
+.dropdown-submenu .dropdown-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}

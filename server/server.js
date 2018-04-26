@@ -374,6 +374,28 @@ app.route('/api/delEvent').post((req, res) => {
 	});;
 });
 
+app.route('/api/createRoute').post((req, res) => {
+	console.log(req.body);
+
+	con.query(`insert into route values ('', '${req.body.route.length}', '');`, function (err, result, field) {
+		if (err) console.log(err);
+		console.log(result);
+		con.query(`select max(routeID) as last from route`, function (err, rows, field) {
+			if (err) console.log(err);
+			console.log(JSON.parse(JSON.stringify(rows))[0].last);
+			con.query(`insert into went_to_route values ('${JSON.parse(JSON.stringify(rows))[0].last}', '${req.body.user}', '', '${req.body.date}', '')`, function (err, result, field) {
+				if (err) console.log(err);
+				res.send(result);
+			});;
+			for(var i=0; i<req.body.route.length; i++) {
+				con.query(`insert into contains values ('${req.body.route[i].attID}', '${i+1}', '${JSON.parse(JSON.stringify(rows))[0].last}')`, function (err, result, field) {
+					if (err) console.log(err);
+				});;
+			}
+		});;
+	});;
+});
+
 app.route('/api/listFav/:id').get((req, res) => {
 	console.log(req.params.id);
 	con.query(`select attraction.attID, name, description from attraction join favorite on attraction.attID = favorite.attID where favorite.uid='${req.params.id}'`, function (err, result, field) {

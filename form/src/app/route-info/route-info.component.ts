@@ -12,6 +12,7 @@ export class RouteInfoComponent implements OnInit {
 	routeList = '';
 	route = [];
 	selectedRoute='';
+  searchKey = '';
 
   constructor(
     private serverService: ServerService,
@@ -36,8 +37,8 @@ export class RouteInfoComponent implements OnInit {
   	);
   }
   onSubmit() {
-  	console.log(this.selectedRoute);
-  	this.router.navigate(['/routedetail/'+this.selectedRoute]);
+  	console.log(this.searchKey);
+  	this.router.navigate(['/routedetail/'+this.selectedRoute+'/'+this.searchKey]);
   }
 
 

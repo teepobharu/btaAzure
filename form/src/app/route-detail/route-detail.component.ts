@@ -144,6 +144,12 @@ export class RouteDetailComponent implements OnInit {
 
   exportPDF() {
   	console.log('here');
-    //this.serverService.createRoute(this.route)
+    console.log(this.route);
+    this.serverService.createRoute(this.route, this.routed.snapshot.paramMap.get('date'), this.user)
+    .subscribe(
+      (res) => {
+          alert('Success');
+      }
+      );
   }
 }

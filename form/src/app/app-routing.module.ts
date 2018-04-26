@@ -15,9 +15,11 @@ import { AdminPlacesComponent }  from './admin-places/admin-places.component';
 import { AdminEventsComponent }  from './admin-events/admin-events.component';
 import { ProfileComponent }  from './profile/profile.component';
 import { GiveFeedbackComponent }  from './give-feedback/give-feedback.component';
+import { HomePageComponent }  from './home-page/home-page.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: '/searchplace', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomePageComponent },
   { path: 'events', component: ShowEventComponent },
   { path: 'addplace', component: AddPlaceComponent },
   { path: 'addevent', component: AddEventComponent },
@@ -25,7 +27,7 @@ const routes: Routes = [
   { path: 'eventdetail/:id', component: EventDetailComponent },
   { path: 'searchplace', component: SearchPlaceComponent },
   { path: 'routeinfo', component: RouteInfoComponent },
-  { path: 'routedetail/:id', component: RouteDetailComponent },
+  { path: 'routedetail/:id/:date', component: RouteDetailComponent },
   { path: 'admin/main', component: AdminMainComponent },
   { path: 'admin/places', component: AdminPlacesComponent },
   { path: 'admin/events', component: AdminEventsComponent },

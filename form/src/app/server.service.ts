@@ -161,6 +161,10 @@ export class ServerService {
 		return this.http.post('http://localhost:8000/api/delEvent', {id:id});
 	} 
 
+	createRoute(route, date, user) {
+		return this.http.post('http://localhost:8000/api/createRoute', {route:route, date:date, user:user});
+	} 
+
 
 
 }
