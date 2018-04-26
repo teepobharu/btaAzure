@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Http } from '@angular/http';
 import { HttpClient } from'@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { Router }          from '@angular/router';
 
 @Component({
   selector: 'app-add-event',
@@ -15,7 +16,7 @@ import { HttpModule } from '@angular/http';
 export class AddEventComponent implements OnInit {
 @ViewChild('f') addPlaceForm: NgForm;
 	  place = {
-	    eventName: '',
+	    eventName: 'fff',
 	    type: '',
 	    startdate: '',
 	    enddate: '',
@@ -32,6 +33,7 @@ export class AddEventComponent implements OnInit {
 	  filesToUpload: Array<File> = [];
 
 	  constructor(
+    	private router: Router,
 	    private serverService: ServerService,
     	private location: Location,
     	private http: Http) { }
@@ -73,7 +75,10 @@ export class AddEventComponent implements OnInit {
 	    console.log('form data variable :   '+ formData.toString());
 	    this.http.post('http://localhost:8000/uploadevent/'+id, formData)
 	        // .map(files => files.json())
-	        .subscribe(files => alert("Success"))
+	        .subscribe(files => {
+	        	alert("Success adding the event");
+        		this.router.navigate(['/events']);
+	        })
 	  }
 
 	  detectFiles(event) {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ServerService }       from '../server.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { DataService } from "../data.service";
 
 @Component({
   selector: 'app-route-detail',
@@ -17,13 +18,18 @@ export class RouteDetailComponent implements OnInit {
   isModify = [];
   relatedPlaces = [];
   temp: any;
+  menu = 'type';
+  user: string = '';
 
   constructor(
     private routed: ActivatedRoute,
     private serverService: ServerService,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,
+    private data: DataService) { }
 
   ngOnInit() {
+    this.data.currentMessage.subscribe(message => this.user = message);
+    this.menu = 'type';
   	this.getRoute();
   }
 
@@ -104,7 +110,40 @@ export class RouteDetailComponent implements OnInit {
         });
   }
 
+  clicked(text,i) {
+    console.log(text);
+    this.menu=text;
+    if(text=='type') {
+      this.serverService.relatedPlaces(this.route[i].attID)
+      .subscribe(
+        (res) => {
+          console.log(res.json());
+          this.relatedPlaces[i] = res.json();
+          this.temp = this.relatedPlaces[i];
+      });
+    }
+    if(text=='area') {
+      this.serverService.relatedArea(this.route[i].attID)
+      .subscribe(
+        (res) => {
+          console.log(res.json());
+          this.relatedPlaces[i] = res.json();
+          this.temp = this.relatedPlaces[i];
+      });
+    }
+    if(text=='fav') {
+      this.serverService.listFav(this.user)
+      .subscribe(
+        (res) => {
+          console.log(res.json());
+          this.relatedPlaces[i] = res.json();
+          this.temp = this.relatedPlaces[i];
+      });
+    }
+  }
+
   exportPDF() {
-  	console.log('exporting');
+  	console.log('here');
+    //this.serverService.createRoute(this.route)
   }
 }

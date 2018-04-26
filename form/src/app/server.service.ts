@@ -29,8 +29,17 @@ export class ServerService {
 		return this.http.post('http://localhost:8000/api/getPlace', {id: id});
 	}
 
+	getEvent(id) {
+		console.log(id);
+		return this.http.post('http://localhost:8000/api/getEvent', {id: id});
+	}
+
 	getUnvPlaces() {
 		return this.http.get('http://localhost:8000/api/getUnvPlaces');
+	}
+
+	getUnvEvents() {
+		return this.http.get('http://localhost:8000/api/getUnvEvents');
 	}
 
 	getComments(id) {
@@ -89,6 +98,11 @@ export class ServerService {
 		return this.http.get('http://localhost:8000/api/relatedPlaces/'+id);
 	} 
 
+	relatedArea(id) {
+		console.log(id);
+		return this.http.get('http://localhost:8000/api/relatedArea/'+id);
+	} 
+
 	token(email, name) {
 		console.log(name);
 		return this.http.post('http://localhost:8000/api/token/', {email: email, name: name});
@@ -137,6 +151,14 @@ export class ServerService {
 
 	delPlace(id) {
 		return this.http.post('http://localhost:8000/api/delPlace', {id:id});
+	} 
+
+	valEvent(id) {
+		return this.http.post('http://localhost:8000/api/valEvent', {id:id});
+	} 
+
+	delEvent(id) {
+		return this.http.post('http://localhost:8000/api/delEvent', {id:id});
 	} 
 
 

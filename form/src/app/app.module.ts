@@ -28,6 +28,7 @@ import { AdminEventsComponent } from './admin-events/admin-events.component';
 import { RouteDetailComponent } from './route-detail/route-detail.component';
 import { ProfileComponent } from './profile/profile.component';
 import { GiveFeedbackComponent } from './give-feedback/give-feedback.component';
+import { EditPlaceComponent } from './edit-place/edit-place.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { GiveFeedbackComponent } from './give-feedback/give-feedback.component';
     RouteDetailComponent,
     ProfileComponent,
     GiveFeedbackComponent,
+    EditPlaceComponent,
   ],
   imports: [
     BrowserModule,

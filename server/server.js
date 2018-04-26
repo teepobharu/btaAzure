@@ -109,6 +109,15 @@ app.route('/api/getPlace').post((req, res) => {
 	});;
 });
 
+app.route('/api/getEvent').post((req, res) => {
+	console.log(req.body);
+	con.query(`select * from events where attID='${req.body.id}'`, function (err, result, field) {
+		if (err) console.log(err);
+		//console.log(result);
+		res.send(result);
+	});;
+});
+
 app.route('/api/getComments/:id').get((req, res) => {
 	console.log(req.body);
 	con.query(`select name, feedback, date, rating from went_to_attraction join users on went_to_attraction.uid = users.uid where attID='${req.params.id}'`, function (err, result, field) {
@@ -228,6 +237,15 @@ app.route('/api/getUnvPlaces').get((req, res) => {
 	});;
 });
 
+app.route('/api/getUnvEvents').get((req, res) => {
+	console.log(req.body);
+	con.query(`select * from events where validated='N'`, function (err, result, field) {
+		if (err) console.log(err);
+		//console.log(result);
+		res.send(result);
+	});;
+});
+
 app.get('/pic/:id', function(req, res) {
 	con.query(`select imgSrc from attraction where attID='${req.params.id}'`, function (err, rows, field) {
 		// var temp = [];
@@ -254,7 +272,16 @@ app.get('/eventpic/:id', function(req, res) {
 
 app.route('/api/relatedPlaces/:id').get((req, res) => {
 	console.log(req.body);
-	con.query(`select attID, name from attraction where type=(select type from attraction where attID = '${req.params.id}') and not attID = '${req.params.id}' order by name`, function (err, result, field) {
+	con.query(`select attID, name from attraction where type=(select type from attraction where attID = '${req.params.id}') and not attID = '${req.params.id}' and validated='Y' order by name`, function (err, result, field) {
+		if (err) console.log(err);
+		console.log(result);
+		res.send(result);
+	});;
+});
+
+app.route('/api/relatedArea/:id').get((req, res) => {
+	console.log(req.body);
+	con.query(`select attID, name from attraction where zone=(select zone from attraction where attID = '${req.params.id}') and not attID = '${req.params.id}' and validated='Y' order by name`, function (err, result, field) {
 		if (err) console.log(err);
 		console.log(result);
 		res.send(result);
@@ -326,6 +353,22 @@ app.route('/api/valPlace').post((req, res) => {
 app.route('/api/delPlace').post((req, res) => {
 	console.log(req.body);
 	con.query(`delete from attraction where attID='${req.body.id}'`, function (err, result, field) {
+		if (err) console.log(err);
+		res.send(result);
+	});;
+});
+
+app.route('/api/valEvent').post((req, res) => {
+	console.log(req.body);
+	con.query(`update events set validated='Y' where attID='${req.body.id}'`, function (err, result, field) {
+		if (err) console.log(err);
+		res.send(result);
+	});;
+});
+
+app.route('/api/delEvent').post((req, res) => {
+	console.log(req.body);
+	con.query(`delete from events where attID='${req.body.id}'`, function (err, result, field) {
 		if (err) console.log(err);
 		res.send(result);
 	});;

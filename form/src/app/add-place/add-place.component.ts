@@ -6,6 +6,7 @@ import { Location } from '@angular/common';
 import { Http } from '@angular/http';
 import { HttpClient } from'@angular/common/http';
 import { HttpModule } from '@angular/http';
+import { Router }          from '@angular/router';
 
 @Component({
   selector: 'app-add-place',
@@ -33,6 +34,7 @@ export class AddPlaceComponent implements OnInit {
 	  filesToUpload: Array<File> = [];
 
 	  constructor(
+    	private router: Router,
 	    private serverService: ServerService,
     	private location: Location,
     	private http: Http) { }
@@ -87,7 +89,10 @@ export class AddPlaceComponent implements OnInit {
 	    }
 	    console.log('form data variable :   '+ formData.toString());
 	    this.serverService.uploadImage(id, formData)
-	        .subscribe(files => alert("Success"))
+	        .subscribe(files => {
+        		this.router.navigate(['/searchPlace']);
+	        	alert("Success adding the place");
+	        })
 	  }
 
 	  addMoreName() {

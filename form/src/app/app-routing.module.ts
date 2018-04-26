@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { ShowEventComponent }   from './show-event/show-event.component';
 import { PlaceDetailComponent } from './place-detail/place-detail.component';
+import { EventDetailComponent } from './event-detail/event-detail.component';
 import { AddPlaceComponent }  from './add-place/add-place.component';
 import { AddEventComponent }  from './add-event/add-event.component';
 import { SearchPlaceComponent }   from './search-place/search-place.component';
@@ -21,6 +22,7 @@ const routes: Routes = [
   { path: 'addplace', component: AddPlaceComponent },
   { path: 'addevent', component: AddEventComponent },
   { path: 'detail/:id', component: PlaceDetailComponent },
+  { path: 'eventdetail/:id', component: EventDetailComponent },
   { path: 'searchplace', component: SearchPlaceComponent },
   { path: 'routeinfo', component: RouteInfoComponent },
   { path: 'routedetail/:id', component: RouteDetailComponent },
