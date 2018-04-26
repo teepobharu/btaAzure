@@ -10,6 +10,8 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class RouteDetailComponent implements OnInit {
   route: any;
+  lat= [];
+  lng= [];
   imageData: any;
   show = false;
   isModify = [];
@@ -35,11 +37,13 @@ export class RouteDetailComponent implements OnInit {
           this.route = data;
           console.log(this.route[0]);
           for (var i=0; i<this.route.length; i++) {
+              this.lat[i] = parseFloat(this.route[i].lat);
+              this.lng[i] = parseFloat(this.route[i].lng);
           		this.isModify.push(false);
           		this.relatedPlaces.push({});
                 this.callImage(i);
           }
-        }, 
+        },
       );
   }
 

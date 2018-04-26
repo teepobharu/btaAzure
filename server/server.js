@@ -8,7 +8,7 @@ var path = require('path');
 
 var corsOptions = {
 	origin: 'http://localhost:4200',
-	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204 
+	optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 var con = mysql.createConnection({
 	host: "localhost",
@@ -52,19 +52,19 @@ app.listen(8000, () => {
 
 app.route('/api/createPlace').post((req, res) => {
 	console.log(req.body);
-	con.query(`insert into attraction values ('', 
-		'${req.body.placeName}', 
-		'${req.body.operDay}', 
+	con.query(`insert into attraction values ('',
+		'${req.body.placeName}',
+		'${req.body.operDay}',
 		'${req.body.operTime}',
 		'${req.body.suggTime}',
-		'${req.body.cost}', 
-		'${req.body.type}', 
-		'${req.body.area}', 
+		'${req.body.cost}',
+		'${req.body.type}',
+		'${req.body.area}',
 		'${req.body.transportation}',
 		'${req.body.description}',
 		'N',
 		'',
-		'0', 
+		'0',
 		'0')`, function (err, result, field) {
 		if (err) console.log(err);
 		else con.query(`select attID from attraction where name='${req.body.placeName}'`, function (err, result, field) {
@@ -75,17 +75,17 @@ app.route('/api/createPlace').post((req, res) => {
 
 app.route('/api/createEvent').post((req, res) => {
 	console.log(req.body);
-	con.query(`insert into events values ('', 
+	con.query(`insert into events values ('',
 		'${req.body.eventName}',
-		'', 
+		'',
 		'${req.body.time}',
-		'', 
+		'',
 		'${req.body.cost}',
 		'${req.body.type}',
 		'${req.body.location}',
-		'${req.body.transportation}', 
+		'${req.body.transportation}',
 		'${req.body.description}',
-		'${req.body.startdate}', 
+		'${req.body.startdate}',
 		'${req.body.enddate}',
 		'N',
 		'',
@@ -120,7 +120,7 @@ app.route('/api/getComments/:id').get((req, res) => {
 
 app.route('/api/getRoute/:id').get((req, res) => {
 	console.log(req.body);
-	con.query(`select contains.attID, name, time, description from contains join attraction on contains.attID=attraction.attID where routeID='${req.params.id}' order by time`, function (err, result, field) {
+	con.query(`select contains.attID, name, time, description, lat, lng from contains join attraction on contains.attID=attraction.attID where routeID='${req.params.id}' order by time`, function (err, result, field) {
 		if (err) console.log(err);
 		console.log(result);
 		res.send(result);
@@ -238,7 +238,7 @@ app.get('/pic/:id', function(req, res) {
 		res.sendFile("/uploads/"+JSON.parse(JSON.stringify(rows))[0].imgSrc, {"root": __dirname});
 	});;
 
-}); 
+});
 
 app.get('/eventpic/:id', function(req, res) {
 	con.query(`select imgSrc from events where attID='${req.params.id}'`, function (err, rows, field) {
@@ -250,7 +250,7 @@ app.get('/eventpic/:id', function(req, res) {
 		res.sendFile("/uploads/"+JSON.parse(JSON.stringify(rows))[0].imgSrc, {"root": __dirname});
 	});;
 
-}); 
+});
 
 app.route('/api/relatedPlaces/:id').get((req, res) => {
 	console.log(req.body);
@@ -365,4 +365,3 @@ app.route('/api/token').post((req, res) => {
 		} else res.send(result);
 	});;
 });
-

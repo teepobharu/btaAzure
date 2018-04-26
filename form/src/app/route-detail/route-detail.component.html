@@ -26,7 +26,7 @@
 			              <button class="btn btn-danger" type="button" style="margin: 16px 5px 0px 0px" (click)="modifyPlace(i)"> Change </button>
 			          	</div>
 			        </div>
-	              
+
 	                <p style="line-height: 25px; height: 75px; overflow: hidden; text-overflow: ellipsis">{{ place.description }}</p>
 	            </div>
         	</div>
@@ -37,7 +37,15 @@
 			</div>
 		</div>
 
+    <div class="col-sm-12" style="height: 40px; width: 100%"></div>
+    <div id="map" class="col-sm-12">
+      <agm-map [latitude]="lat[0]" [longitude]="lng[0]" [zoom]=14>
+        <agm-marker [latitude]="lat[i]" [longitude]="lng[i]" *ngFor="let place of route; index as i;"></agm-marker>
+      </agm-map>
+    </div>
+    <div class="col-sm-12" style="height: 65px; width: 100%"></div>
+    <div class="wrapper">
 		<button class="btn btn-success" type="button" style="margin: 0px 0px 100px 30px; font-size: 28px;" (click)="ExportPDF"> Export as PDF</button>
-		<hr>
+    </div>		<hr>
 	</div>
 </div>
