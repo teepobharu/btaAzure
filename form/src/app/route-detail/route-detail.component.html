@@ -34,17 +34,17 @@
 				<div style="margin-top: 10px;">
 					<span *ngIf="menu=='type'" (click)="clicked('type',i)" style="margin: 10px 0px 0px 5px; cursor: pointer; border-bottom-style: solid; border-bottom-width: 1px;"><b>By type</b>
 					</span>
-					<span *ngIf="menu!='type'" (click)="clicked('type',i)"  style="margin: 10px 0px 0px 5px; cursor: pointer;"> By type 
+					<span *ngIf="menu!='type'" (click)="clicked('type',i)"  style="margin: 10px 0px 0px 5px; cursor: pointer;"> By type
 					</span>
 					<span *ngIf="menu=='area'" (click)="clicked('area',i)" style="margin: 10px 0px 0px 20px; cursor: pointer; border-bottom-style: solid; border-bottom-width: 1px;"><b> By area </b>
 					</span>
-					<span *ngIf="menu!='area'" (click)="clicked('area',i)"  style="margin: 10px 0px 0px 20px; cursor: pointer;"> By area 
+					<span *ngIf="menu!='area'" (click)="clicked('area',i)"  style="margin: 10px 0px 0px 20px; cursor: pointer;"> By area
 					</span>
 					<span *ngIf="menu=='fav'" (click)="clicked('fav',i)" style="margin: 10px 0px 0px 20px; cursor: pointer; border-bottom-style: solid; border-bottom-width: 1px;"><b> From favorite list </b>
 					</span>
-					<span *ngIf="menu!='fav'" (click)="clicked('fav',i)"  style="margin: 10px 0px 0px 20px; cursor: pointer;"> From favorite list 
+					<span *ngIf="menu!='fav'" (click)="clicked('fav',i)"  style="margin: 10px 0px 0px 20px; cursor: pointer;"> From favorite list
 					</span>
-				</div>
+        </div>
 					<div class="col inline" *ngFor="let relatedPlace of temp; index as j">
 						<button class="btn btn-basic" type="button" style="margin: 16px 5px 0px 0px" (click)="choosePlace(i, j)"> {{relatedPlace.name}} </button>
 					</div>
@@ -53,8 +53,11 @@
 
     <div class="col-sm-12" style="height: 40px; width: 100%"></div>
     <div id="map" class="col-sm-12">
-      <agm-map [latitude]="lat[0]" [longitude]="lng[0]" [zoom]=14>
-        <agm-marker [latitude]="lat[i]" [longitude]="lng[i]" *ngFor="let place of route; index as i;"></agm-marker>
+      <agm-map [latitude]="13.7563" [longitude]="100.5018" [zoom]="zoom" *ngIf="locationChosen">
+        <agm-marker
+        [latitude]="lat[i]"
+        [longitude]="lng[i]"
+        *ngFor="let place of route; index as i;"></agm-marker>
       </agm-map>
     </div>
     <div class="col-sm-12" style="height: 65px; width: 100%"></div>

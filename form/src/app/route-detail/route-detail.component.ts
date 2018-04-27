@@ -20,6 +20,8 @@ export class RouteDetailComponent implements OnInit {
   temp: any;
   menu = 'type';
   user: string = '';
+  locationChosen=false;
+  zoom=14;
 
   constructor(
     private routed: ActivatedRoute,
@@ -42,6 +44,7 @@ export class RouteDetailComponent implements OnInit {
           const data = res.json();
           this.route = data;
           console.log(this.route[0]);
+          this.locationChosen=true;
           for (var i=0; i<this.route.length; i++) {
               this.lat[i] = parseFloat(this.route[i].lat);
               this.lng[i] = parseFloat(this.route[i].lng);
@@ -52,6 +55,7 @@ export class RouteDetailComponent implements OnInit {
         },
       );
   }
+
 
   callImage(count) {
     this.serverService.getImage(this.route[count].attID)
@@ -105,13 +109,21 @@ export class RouteDetailComponent implements OnInit {
              urlCreator.createObjectURL(blob));
           this.route[i]['img'] = this.imageData;
           this.route[i]['time'] = i+1;
-  	this.isModify[i] = false;
+  	      this.isModify[i] = false;
   				console.log(this.route);
+          this.locationChosen=false;
+          for (var x=0; x<this.route.length; x++) {
+            this.locationChosen = true;
+            this.lat[x] = parseFloat(this.route[x].lat);
+            this.lng[x] = parseFloat(this.route[x].lng);
+            this.zoom=13
+          }
         });
   }
 
   clicked(text,i) {
     console.log(text);
+    console.log(this.route);
     this.menu=text;
     if(text=='type') {
       this.serverService.relatedPlaces(this.route[i].attID)
@@ -140,6 +152,7 @@ export class RouteDetailComponent implements OnInit {
           this.temp = this.relatedPlaces[i];
       });
     }
+
   }
 
   exportPDF() {
