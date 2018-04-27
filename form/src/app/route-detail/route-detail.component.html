@@ -57,7 +57,9 @@
         <agm-marker
         [latitude]="lat[i]"
         [longitude]="lng[i]"
-        *ngFor="let place of route; index as i;"></agm-marker>
+        *ngFor="let place of route; index as i;">
+        <agm-info-window>{{i+1}} {{place.name}}</agm-info-window>
+      </agm-marker>
       </agm-map>
     </div>
     <div class="col-sm-12" style="height: 65px; width: 100%"></div>
