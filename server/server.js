@@ -147,7 +147,7 @@ app.route('/api/getUser/:id').get((req, res) => {
 
 app.route('/api/suggestPlaces/:key').get((req, res) => {
 	console.log(req.params.key);
-	con.query(`select attraction.attID, attraction_name.name, description from attraction join attraction_name on attraction.attId=attraction_name.attID where attraction_name.name like '${req.params.key}%' and validated='Y' order by name`, function (err, result, field) {
+	con.query(`select attraction.attID, attraction_name.name, description from attraction join attraction_name on attraction.attId=attraction_name.attID where attraction_name.name like '%${req.params.key}%' and validated='Y' order by name`, function (err, result, field) {
 		if (err) console.log(err);
 		console.log(result);
 		res.send(result);

@@ -1,4 +1,4 @@
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-default navbar-fixed-top">
 	<div class="container-fluid">
 		<div class="navbar-header">
 			<a routerLink="/" class="navbar-brand"> BTA</a>
@@ -10,7 +10,7 @@
 				<li *ngIf="message!='Login'"><a routerLink="/routeinfo">Route</a></li>
 				<li><a routerLink="/events">Events</a></li>
 			</ul>
-			<div *ngIf="message=='Login'">
+			<span *ngIf="message=='Login'">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 							<a routerLink="/login" class="dropdown-toggle" role="button"><span class="glyphicon glyphicon-user"></span> {{message}}</a>
@@ -20,8 +20,8 @@
 						</ul>
 					</li>
 				</ul>
-			</div>
-			<div *ngIf="message!='Login'">
+			</span>
+			<span *ngIf="message!='Login'">
 				<ul class="nav navbar-nav navbar-right">
 					<li class="dropdown">
 							<a routerLink="/profile" class="dropdown-toggle" role="button"><span class="glyphicon glyphicon-user"></span> {{user}}</a>
@@ -31,7 +31,7 @@
 						</ul>
 					</li>
 				</ul>
-			</div>
+			</span>
 		</div>
 	</div>
 </nav>
