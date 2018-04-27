@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AgmCoreModule } from '@agm/core';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule }    from '@angular/common/http';
 import { GoogleSignInComponent } from 'angular-google-signin';
@@ -62,7 +63,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     AppRoutingModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyCYae9TLSPJfrpqsEZ82H5LetPE9SoULM0'
-    })
+    }),
+    AgmSnazzyInfoWindowModule
   ],
   providers: [ServerService, DataService],
   bootstrap: [AppComponent]

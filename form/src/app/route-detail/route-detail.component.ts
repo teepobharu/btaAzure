@@ -4,6 +4,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from "../data.service";
 
+
 @Component({
   selector: 'app-route-detail',
   templateUrl: './route-detail.component.html',
@@ -13,6 +14,8 @@ export class RouteDetailComponent implements OnInit {
   route: any;
   lat= [];
   lng= [];
+  olat: any ;
+  olng: any ;
   imageData: any;
   show = false;
   isModify = [];
@@ -21,7 +24,8 @@ export class RouteDetailComponent implements OnInit {
   menu = 'type';
   user: string = '';
   locationChosen=false;
-  zoom=14;
+  zoom=15;
+  labelOptions = [];
 
   constructor(
     private routed: ActivatedRoute,
@@ -45,7 +49,10 @@ export class RouteDetailComponent implements OnInit {
           this.route = data;
           console.log(this.route[0]);
           this.locationChosen=true;
+          this.olat = parseFloat(this.route[2].lat);
+          this.olng = parseFloat(this.route[2].lng);
           for (var i=0; i<this.route.length; i++) {
+              this.labelOptions[i] = String(i+1);
               this.lat[i] = parseFloat(this.route[i].lat);
               this.lng[i] = parseFloat(this.route[i].lng);
           		this.isModify.push(false);
@@ -112,6 +119,8 @@ export class RouteDetailComponent implements OnInit {
   	      this.isModify[i] = false;
   				console.log(this.route);
           this.locationChosen=false;
+          this.olat = 13.7563;
+          this.olng = 100.5018;
           for (var x=0; x<this.route.length; x++) {
             this.locationChosen = true;
             this.lat[x] = parseFloat(this.route[x].lat);

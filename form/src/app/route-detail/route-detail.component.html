@@ -53,12 +53,17 @@
 
     <div class="col-sm-12" style="height: 40px; width: 100%"></div>
     <div id="map" class="col-sm-12">
-      <agm-map [latitude]="13.7563" [longitude]="100.5018" [zoom]="zoom" *ngIf="locationChosen">
+      <agm-map [latitude]="olat" [longitude]="olng" [zoom]="zoom" *ngIf="locationChosen">
         <agm-marker
         [latitude]="lat[i]"
         [longitude]="lng[i]"
+        [label]="labelOptions[i]"
         *ngFor="let place of route; index as i;">
-        <agm-info-window>{{i+1}} {{place.name}}</agm-info-window>
+        <agm-snazzy-info-window [maxWidth]="200" [closeWhenOthersOpen]="true">
+          <ng-template>
+            {{i+1}} {{place.name}}
+          </ng-template>
+        </agm-snazzy-info-window>
       </agm-marker>
       </agm-map>
     </div>
