@@ -21,6 +21,9 @@ export class PlaceDetailComponent implements OnInit {
   lng: any;
   user: string = '';
   favorite = true;
+  favclick= false;
+  favsuccess= true;
+  favstatus= '';
 
   constructor(
     private router: Router,
@@ -111,6 +114,9 @@ export class PlaceDetailComponent implements OnInit {
   }
 
   favorites(): void {
+    if (this.favclick) { return; }
+    this.favclick = true;
+    this.favsuccess = true;
     if(this.favorite==false) {
 
       this.serverService.addFav(this.user, this.route.snapshot.paramMap.get('id'))
@@ -118,8 +124,9 @@ export class PlaceDetailComponent implements OnInit {
           (res) => {
               console.log('success add favorite');
           }
+           , (error) => { this.favsuccess = false; }
         );
-
+        this.favstatus= 'Removed successfully';
         this.favorite=true;
     } else {
 
@@ -128,8 +135,9 @@ export class PlaceDetailComponent implements OnInit {
           (res) => {
               console.log('success add favorite')
           }
+           , (error) => { this.favsuccess = false; }
       );
-
+      this.favstatus= 'Added successfully';
       this.favorite=false;
     }
   }
