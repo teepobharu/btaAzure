@@ -119,8 +119,8 @@ export class RouteDetailComponent implements OnInit {
   	      this.isModify[i] = false;
   				console.log(this.route);
           this.locationChosen=false;
-          this.olat = 13.7563;
-          this.olng = 100.5018;
+          this.olat = this.route[i].lat;
+          this.olng = this.route[i].lng;
           for (var x=0; x<this.route.length; x++) {
             this.locationChosen = true;
             this.lat[x] = parseFloat(this.route[x].lat);
