@@ -1,13 +1,13 @@
 <<html lang="en">
 <head>
-  
+
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Muli" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
- 
+
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
   body {
@@ -16,7 +16,7 @@
   }
   h3, h4 {
       margin: 10px 0 30px 0;
-      letter-spacing: 10px;      
+      letter-spacing: 10px;
       font-size: 20px;
       color: #111;
   }
@@ -35,7 +35,7 @@
   }
   .carousel-inner img {
       -webkit-filter: grayscale(90%);
-      filter: grayscale(90%); /* make all photos black and white */ 
+      filter: grayscale(90%); /* make all photos black and white */
       width: 100%; /* Set width to 100% */
       margin: auto;
   }
@@ -94,7 +94,7 @@
   .nav-tabs li a {
       color: #777;
   }
-  
+
   .navbar {
       font-family: Muli, sans-serif;
       margin-bottom: 0;
@@ -104,8 +104,11 @@
       letter-spacing: 1px;
       opacity: 1.0;
   }
-  .navbar li a, .navbar .navbar-brand { 
+  .navbar li a, .navbar .navbar-brand {
       color: #d5d5d5 !important;
+  }
+  .navbar li b, .navbar .navbar-brand {
+      color: #e8c63e !important;
   }
   .navbar-nav li a:hover {
       color: #fff !important;
@@ -121,7 +124,7 @@
       color: #fff;
       background-color: #555 !important;
   }
-  
+
   </style>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="50">
@@ -132,9 +135,9 @@
 			<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
-        <span class="icon-bar"></span>                        
+        <span class="icon-bar"></span>
       		</button>
-			<a routerLink="/" class="navbar-brand"> BTA</a>
+			<b routerLink="/" class="navbar-brand"> BTA</b>
 		</div>
 		<div class="collapse navbar-collapse" id="myNavbar">
 			<ul class="nav navbar-nav navbar-right">
