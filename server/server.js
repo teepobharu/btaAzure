@@ -433,8 +433,37 @@ app.route('/api/token').post((req, res) => {
 
 app.route('/api/editPlace/:id').post((req, res) => {
 	console.log(req.body);
-	con.query(`update attraction set validated='Y' where attID='${req.body.id}'`, function (err, result, field) {
+	con.query(`update attraction set 
+		name= '${req.body.placeName}',
+		operDate= '${req.body.operDay}',
+		operTime='${req.body.operTime}',
+		suggTime='${req.body.suggTime}',
+		cost='${req.body.cost}',
+		type='${req.body.type}',
+		zone='${req.body.area}',
+		transportation='${req.body.transportation}',
+		description='${req.body.description}',
+		validated='Y'
+				where attID='${req.params.id}'`, function (err, result, field) {
 		if (err) console.log(err);
 		res.send(result);
+	});;
+});
+app.route('/api/editName').post((req, res) => {
+	console.log(req.body);
+	con.query(`update attraction_name set name ='${req.body.nname}'  where attID='${req.body.att}'and name= '${req.body.name}')`, function (err, result, field) {
+		if (err) console.log(err);
+	});;
+});
+app.route('/api/setName').post((req, res) => {
+	console.log(req.body);
+	con.query(`insert into attraction_name values ('${req.body.att}', '${req.body.name}')`, function (err, result, field) {
+		if (err) console.log(err);
+	});;
+});
+app.route('/api/getNames').get((req, res) => {
+	console.log(req.body);
+	con.query(`select name from attraction_name where attID='${req.body.att}'`, function (err, result, field) {
+		if (err) console.log(err);
 	});;
 });

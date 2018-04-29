@@ -17,6 +17,7 @@ export class EditPlaceComponent implements OnInit {
   @ViewChild('f') addPlaceForm: NgForm;
   place: any;
   eplace = {
+    names: ['Name1' , 'Name2', 'Name3'],
     placeName: '',
     type: '',
     operDay: '',
@@ -76,6 +77,7 @@ export class EditPlaceComponent implements OnInit {
           this.place = data;
           this.eplace = {
             placeName: this.place[0].name,
+            names: ['', '', ''] ,
             type: this.place[0].type.toLowerCase(),
             operDay: this.place[0].operDate,
             operTime: this.place[0].operTime,
@@ -86,7 +88,11 @@ export class EditPlaceComponent implements OnInit {
             description: this.place[0].description
           };
           // this.eplace = this.place[0];
-
+          // for(var i=0; i<this.eplace.names.length; i++) {
+          //   if(this.eplace.names[i]!='') {
+          //     this.eplace.names[i]=this.getNames(i, res.json()[0].attID);
+          //   }
+          // }
           console.log(this.eplace);
           console.log('this.place=');
           console.log(this.place[0]);
@@ -111,7 +117,6 @@ export class EditPlaceComponent implements OnInit {
       });
   }
   onSubmit() {
-    
     this.submitted = true;
     this.place.placeName = this.addPlaceForm.value.placeName;
     this.place.type = this.addPlaceForm.value.type;
@@ -125,8 +130,6 @@ export class EditPlaceComponent implements OnInit {
     this.name.push(this.addPlaceForm.value.placeName2);
     this.name.push(this.addPlaceForm.value.placeName3);
     this.name.push(this.addPlaceForm.value.placeName4);
-    console.log(this.place);
-    this.addPlaceForm.reset();
 
     this.serverService.editPlace(this.place)
       .subscribe(
@@ -140,6 +143,21 @@ export class EditPlaceComponent implements OnInit {
           (err) => console.log('err')
       );
 
+  }
+  detectFiles(event) {
+    this.filesToUpload = <Array<File>>event.target.files;
+    this.urls = [];
+    let files = event.target.files;
+    if (files) {
+      for (let file of files) {
+        let reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.urls.push(e.target.result);
+        }
+        reader.readAsDataURL(file);
+      }
+          console.log(this.urls);
+    }
   }
   setName(i, att) {
     this.serverService.setName(this.name[i], att)
@@ -160,7 +178,7 @@ export class EditPlaceComponent implements OnInit {
         .subscribe(files => {
           this.router.navigate(['/searchPlace']);
           alert("Success adding the place");
-        })
+        });
   }
   goBack() {
     this.router.navigate(['/admin/places']);
