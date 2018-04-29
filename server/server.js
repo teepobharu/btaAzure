@@ -448,8 +448,11 @@ app.route('/api/editPlace').post((req, res) => {
 		validated='Y'
 				where attID = '${req.body.attID}'`, function (err, result, field) {
 		if (err) console.log(err);
-		else con.query(`select attID from attraction where name='${req.body.placeName}'`, function (err, result, field) {
-			res.send(result);
+		else { 
+			con.query(`select attID from attraction where name='${req.body.placeName}'`, function (err, result, field) {
+				res.send(result);
+			});;
+		}
 	});;
 });
 app.route('/api/editName').post((req, res) => {
