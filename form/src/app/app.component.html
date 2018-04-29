@@ -145,7 +145,7 @@
 				<li class="{{brightDoD}}"><a routerLink="/searchplace" (click)="onClickD()">Destination</a></li>
 				<li class="{{brightDoR}}" *ngIf="message=='Login'"><a routerLink="/login" (click)="onClickR()">Route</a></li>
 				<li class="{{brightDoR}}" *ngIf="message!='Login'"><a routerLink="/routeinfo" (click)="onClickR()">Route</a></li>
-				<li class="{{brightDoE}}"><a routerLink="/events"(click)="onClickR()">Events</a></li>
+				<li class="{{brightDoE}}"><a routerLink="/events"(click)="onClickE()">Events</a></li>
 			</ul>
 			<span *ngIf="message=='Login'">
 				<ul class="nav navbar-nav navbar-right">
