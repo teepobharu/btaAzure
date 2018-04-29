@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   routes= [];
   imageData: any;
   user: string = '';
+  message: string = '';
 
   constructor(
     private serverService: ServerService,
