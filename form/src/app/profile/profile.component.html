@@ -28,7 +28,7 @@
         	<div class="col-sm-7">
         		<h3 style="margin-bottom: 10px;">History</h3>
 		    		<div class="col inline" *ngFor="let route of routes; index as i;" style="border-left: solid 2px; color: #bbb; margin: 0px 0px 10px 10px; padding-top: 15px;">
-		        			<button routerLink="/routedetail/{{route[i].routeID}}" class="btn btn-primary pull-right" type="button" style="margin: 5px; font-size: 18px;">View</button>
+		        			<button routerLink="/routedetail/{{route[i].routeID}}/{{route[i].date}}" class="btn btn-primary pull-right" type="button" style="margin: 5px; font-size: 18px;">View</button>
 		    			<div *ngIf="routes[i][0].rated=='Y'">
 		        			<button class="btn btn-basic pull-right" type="button" style="margin: 5px; font-size: 18px;">Rated</button>
 		        		</div>

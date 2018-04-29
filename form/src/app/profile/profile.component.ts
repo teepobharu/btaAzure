@@ -65,6 +65,7 @@ export class ProfileComponent implements OnInit {
 	          console.log(this.routes);
 	          for (var i=0; i<this.routes.length; i++) {
 	                  this.isRated(i);
+                    this.routes[i][0].date = this.routes[i][0].date.substring(0,10);
 	          }
 
 	        },

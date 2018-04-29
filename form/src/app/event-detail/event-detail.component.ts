@@ -51,7 +51,7 @@ export class EventDetailComponent implements OnInit {
         (error) => console.log('error')
       );
 
-    this.serverService.getImage(id)
+    this.serverService.getEventImage(id)
       .toPromise()
       .then((res: any) => {
         let blob = new Blob([res._body], {
