@@ -31,8 +31,13 @@
     "bootstrap": "^3.3.7",
     "core-js": "^2.4.1",
     "gapi": "0.0.3",
+    "ng2-opd-popup": "^1.1.21",
     "rxjs": "^5.5.2",
+<<<<<<< HEAD
     "snazzy-info-window": "^1.1.0",
+=======
+    "snazzy-info-window": "^1.1.1",
+>>>>>>> 8bd2d4c56cb270d355b8d6740b7b488cda690218
     "zone.js": "^0.8.14"
   },
   "devDependencies": {
