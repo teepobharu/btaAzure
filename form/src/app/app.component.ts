@@ -14,6 +14,7 @@ export class AppComponent implements OnInit{
   brightDoD: any;
   brightDoR: any;
   brightDoE: any;
+  brightDoL: any;
 	message: string;
 	user: string;
 
