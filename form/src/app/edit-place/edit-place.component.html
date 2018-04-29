@@ -9,7 +9,7 @@
         <div>
             <!-- <button type="button" class="btn btn-success pull-right" style="margin: -45px 263px 0px 0px" (click)="validate()">Validate</button>
             <button type="button" class="btn btn-danger pull-right" style="margin: -45px 193px 0px 0px" (click)="delete()">Delete</button> -->
-            <button type="button" class="btn btn-warning pull-right" style="margin: -45px 132px 0px 0px" (click)="reviewChange()">Review</button>
+            <button type="button" class="btn btn-warning pull-right" style="margin: -45px 132px 0px 0px" (click)="reviewChange()"[disabled]="!f.valid">Save+View</button>
             <button type="button" class="btn btn-default pull-right" style="margin: -45px 20px 0px 0px" (click)="goBack()">Back</button>
         </div>
       <hr>
@@ -106,6 +106,21 @@
           <div class="form-group">
             <label for="description">Description</label>
             <textarea type="text" id="description" class="form-control" [(ngModel)]="eplace.description" name="description" required></textarea>
+          </div>
+        </div>
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="coordinates">Google Coordinates</label>
+            <div class="row">
+              <div class="col-sm-6"> 
+                Latitude
+                <input type="text" id="lat" class="form-control" [(ngModel)]="lat" name="lat" required>
+              </div>
+              <div class="col-sm-6"> 
+                Longtitude
+                <input type="text" id="lng" class="form-control" [(ngModel)]="lng" name="lng" required>
+              </div>
+            </div>
           </div>
         </div>
         <div class="col-sm-12">

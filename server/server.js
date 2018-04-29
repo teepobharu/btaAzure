@@ -431,7 +431,7 @@ app.route('/api/token').post((req, res) => {
 	});;
 });
 
-app.route('/api/editPlace/:id').post((req, res) => {
+app.route('/api/editPlace').post((req, res) => {
 	console.log(req.body);
 	con.query(`update attraction set 
 		name= '${req.body.placeName}',
@@ -443,27 +443,25 @@ app.route('/api/editPlace/:id').post((req, res) => {
 		zone='${req.body.area}',
 		transportation='${req.body.transportation}',
 		description='${req.body.description}',
+		lat='${req.body.lat}',
+		lng='${req.body.lat}',
 		validated='Y'
-				where attID='${req.params.id}'`, function (err, result, field) {
+				where attID = '${req.body.attID}'`, function (err, result, field) {
 		if (err) console.log(err);
-		res.send(result);
+		else con.query(`select attID from attraction where name='${req.body.placeName}'`, function (err, result, field) {
+			res.send(result);
 	});;
 });
 app.route('/api/editName').post((req, res) => {
 	console.log(req.body);
-	con.query(`update attraction_name set name ='${req.body.nname}'  where attID='${req.body.att}'and name= '${req.body.name}')`, function (err, result, field) {
+	con.query(`update attraction_name set name ='${req.body.nname}'  where attID='${req.body.id}'and name= '${req.body.name}')`, function (err, result, field) {
 		if (err) console.log(err);
 	});;
 });
-app.route('/api/setName').post((req, res) => {
+app.route('/api/getNames/:id').get((req, res) => {
 	console.log(req.body);
-	con.query(`insert into attraction_name values ('${req.body.att}', '${req.body.name}')`, function (err, result, field) {
+	con.query(`select attraction_name.name from attraction_name where attID ='${req.params.id}'`, function (err, result, field) {
 		if (err) console.log(err);
-	});;
-});
-app.route('/api/getNames').get((req, res) => {
-	console.log(req.body);
-	con.query(`select name from attraction_name where attID='${req.body.att}'`, function (err, result, field) {
-		if (err) console.log(err);
+		res.send(result);
 	});;
 });

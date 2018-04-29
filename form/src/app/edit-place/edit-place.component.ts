@@ -15,9 +15,10 @@ import { NgForm } from '@angular/forms';
 })
 export class EditPlaceComponent implements OnInit {
   @ViewChild('f') addPlaceForm: NgForm;
+  id: number;
   place: any;
   eplace = {
-    names: ['Name1' , 'Name2', 'Name3'],
+    names: [],
     placeName: '',
     type: '',
     operDay: '',
@@ -49,6 +50,7 @@ export class EditPlaceComponent implements OnInit {
   ) { }
   ngOnInit() {
     this.getPlace();
+    this.id = +this.route.snapshot.paramMap.get('id');
     // this.eplace = {
     //   placeName: 'this.place[0].placeName',
     //   type: 'this.place[0].type',
@@ -77,7 +79,7 @@ export class EditPlaceComponent implements OnInit {
           this.place = data;
           this.eplace = {
             placeName: this.place[0].name,
-            names: ['', '', ''] ,
+            names: [],
             type: this.place[0].type.toLowerCase(),
             operDay: this.place[0].operDate,
             operTime: this.place[0].operTime,
@@ -87,15 +89,17 @@ export class EditPlaceComponent implements OnInit {
             transportation: this.place[0].transportation,
             description: this.place[0].description
           };
-          // this.eplace = this.place[0];
-          // for(var i=0; i<this.eplace.names.length; i++) {
-          //   if(this.eplace.names[i]!='') {
-          //     this.eplace.names[i]=this.getNames(i, res.json()[0].attID);
-          //   }
-          // }
-          console.log(this.eplace);
-          console.log('this.place=');
-          console.log(this.place[0]);
+        //   for(var i=0; i<this.eplace.names.length; i++) {
+        //     if(this.eplace.names[i]!='') {
+        //     }
+        //   }
+        // //   this.serverService.getNames(res.json()[0].attID)
+        // //   .subscribe(
+        // //       (res) => {
+        // //         console.log(res);
+        // //       }
+        // // ,(error) => console.log('error')
+        // // );
           console.log(typeof(this.place[0]));
           this.lat = parseFloat(this.place[0].lat);
           this.lng = parseFloat(this.place[0].lng);
@@ -127,6 +131,8 @@ export class EditPlaceComponent implements OnInit {
     this.place.cost = this.addPlaceForm.value.cost;
     this.place.transportation = this.addPlaceForm.value.transportation;
     this.place.description =  this.addPlaceForm.value.description;
+    this.place.lat =  this.addPlaceForm.value.lat;
+    this.place.lng =  this.addPlaceForm.value.lng;
     this.name.push(this.addPlaceForm.value.placeName2);
     this.name.push(this.addPlaceForm.value.placeName3);
     this.name.push(this.addPlaceForm.value.placeName4);
@@ -136,9 +142,10 @@ export class EditPlaceComponent implements OnInit {
           (res) => {
             console.log(res.json()[0].attID),
         this.upload(res.json()[0].attID);
-         for(var i=0; i<this.name.length; i++) {
-           if(this.name[i]!='') this.setName(i, res.json()[0].attID);
-         }
+        console.log(this.eplace.names);
+        //  for(var i=1; i<this.name.length; i++) {
+        //    if(this.name[i]!='') this.serverService.editName(this.place[0].attID, this.eplace.names[i],this.place[0]);
+        //  }
           },
           (err) => console.log('err')
       );
@@ -153,7 +160,7 @@ export class EditPlaceComponent implements OnInit {
         let reader = new FileReader();
         reader.onload = (e: any) => {
           this.urls.push(e.target.result);
-        }
+        };
         reader.readAsDataURL(file);
       }
           console.log(this.urls);
@@ -176,7 +183,7 @@ export class EditPlaceComponent implements OnInit {
     console.log('form data variable :   '+ formData.toString());
     this.serverService.uploadImage(id, formData)
         .subscribe(files => {
-          this.router.navigate(['/searchPlace']);
+          this.router.navigate(['/admin/places']);
           alert("Success adding the place");
         });
   }
@@ -184,6 +191,7 @@ export class EditPlaceComponent implements OnInit {
     this.router.navigate(['/admin/places']);
   }
   reviewChange() {
+    this.onSubmit();
     this.router.navigate(['/detail/' + this.route.snapshot.paramMap.get('id')]);
   }
   onReset() {
