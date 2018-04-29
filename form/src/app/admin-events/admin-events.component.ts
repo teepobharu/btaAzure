@@ -38,7 +38,7 @@ export class AdminEventsComponent implements OnInit {
   }
 
   callImage(count) {
-    this.serverService.getImage(this.places[count].attID)
+    this.serverService.getEventImage(this.places[count].attID)
       .toPromise()
       .then((res: any) => {
         let blob = new Blob([res._body], {
