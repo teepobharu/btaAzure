@@ -25,11 +25,9 @@ export class PlaceDetailComponent implements OnInit {
   favclick= false;
   favsuccess= true;
   favstatus= '';
-<<<<<<< HEAD
   editMode = false;
-=======
 
->>>>>>> 8bd2d4c56cb270d355b8d6740b7b488cda690218
+
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -123,26 +121,19 @@ export class PlaceDetailComponent implements OnInit {
     if (this.favclick) { return; }
     this.favclick = true;
     this.favsuccess = true;
-<<<<<<< HEAD
-    if (this.favorite === false) {
-=======
+
     if(this.favorite==false) {
->>>>>>> 8bd2d4c56cb270d355b8d6740b7b488cda690218
+
 
       this.serverService.addFav(this.user, this.route.snapshot.paramMap.get('id'))
         .subscribe(
           (res) => {
               console.log('success add favorite');
           }
-<<<<<<< HEAD
+
           , (error) => { this.favsuccess = false; }
         );
-       this.favstatus= 'Adding Success';
-=======
-           , (error) => { this.favsuccess = false; }
-        );
-        this.favstatus= 'Removed successfully';
->>>>>>> 8bd2d4c56cb270d355b8d6740b7b488cda690218
+        this.favstatus= 'Removing Success';
         this.favorite=true;
     } else {
 
@@ -151,15 +142,10 @@ export class PlaceDetailComponent implements OnInit {
           (res) => {
               console.log('success remove favorite');
           }
-<<<<<<< HEAD
           , (error) => { this.favsuccess = false; }
       );
-      this.favstatus= 'Removing Success';
-=======
-           , (error) => { this.favsuccess = false; }
-      );
-      this.favstatus= 'Added successfully';
->>>>>>> 8bd2d4c56cb270d355b8d6740b7b488cda690218
+      this.favstatus= 'Adding Success';
+
       this.favorite=false;
     }
     setTimeout(() => {
