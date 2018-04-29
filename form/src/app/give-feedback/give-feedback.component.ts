@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DataService } from "../data.service";
+import { Router }          from '@angular/router';
 
 
 
@@ -25,6 +26,7 @@ export class GiveFeedbackComponent implements OnInit {
     private routed: ActivatedRoute,
 	private serverService: ServerService,
     private sanitizer: DomSanitizer,
+          private router: Router,
     private data: DataService) { }
 
   ngOnInit() {
@@ -82,7 +84,8 @@ export class GiveFeedbackComponent implements OnInit {
   	console.log(this.comments[0]);
   	this.serverService.commentRoute(this.user, this.routed.snapshot.paramMap.get('id'), this.rate[0]*10, this.comments[0])
   	.subscribe(
-  		(res) => console.log('yey')
+  		(res) => alert('Your feedback is successfully submitted.');
+      this.router.navigate(['/profile']);
   		);
   }
 }
