@@ -430,3 +430,11 @@ app.route('/api/token').post((req, res) => {
 		} else res.send(result);
 	});;
 });
+
+app.route('/api/editPlace/:id').post((req, res) => {
+	console.log(req.body);
+	con.query(`update attraction set validated='Y' where attID='${req.body.id}'`, function (err, result, field) {
+		if (err) console.log(err);
+		res.send(result);
+	});;
+});

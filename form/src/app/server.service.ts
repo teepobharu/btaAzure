@@ -143,7 +143,7 @@ export class ServerService {
 
 	setName(name, att) {
 		return this.http.post('http://localhost:8000/api/setName', {name:name, att:att});
-	} 
+	}
 
 	valPlace(id) {
 		return this.http.post('http://localhost:8000/api/valPlace', {id:id});
@@ -165,6 +165,8 @@ export class ServerService {
 		return this.http.post('http://localhost:8000/api/createRoute', {route:route, date:date, user:user});
 	} 
 
-
+	editPlace(id) {
+		return this.http.post('http://localhost:8000/editPlace/'+id , {id:id});
+	}
 
 }

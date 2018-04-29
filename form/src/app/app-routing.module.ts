@@ -16,6 +16,7 @@ import { AdminEventsComponent }  from './admin-events/admin-events.component';
 import { ProfileComponent }  from './profile/profile.component';
 import { GiveFeedbackComponent }  from './give-feedback/give-feedback.component';
 import { HomePageComponent }  from './home-page/home-page.component';
+import { EditPlaceComponent } from './edit-place/edit-place.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'detail/:id', component: PlaceDetailComponent },
   { path: 'eventdetail/:id', component: EventDetailComponent },
   { path: 'searchplace', component: SearchPlaceComponent },
+  { path: 'edit/:id', component: EditPlaceComponent },
   { path: 'routeinfo', component: RouteInfoComponent },
   { path: 'routedetail/:id/:date', component: RouteDetailComponent },
   { path: 'admin/main', component: AdminMainComponent },
@@ -34,6 +36,7 @@ const routes: Routes = [
   { path: 'login', component: LoginPageComponent },
   { path: 'feedback/:id', component: GiveFeedbackComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: '**', redirectTo: 'home' }
 ];
 
 @NgModule({

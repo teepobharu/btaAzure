@@ -15,13 +15,17 @@ import { Router }          from '@angular/router';
 })
 export class PlaceDetailComponent implements OnInit {
   @Input() place: any;
+  id: number;
   imageData: any;
   comments: any;
   lat: any;
   lng: any;
   user: string = '';
   favorite = true;
-
+  favclick= false;
+  favsuccess= true;
+  favstatus= '';
+  editMode = false;
   constructor(
     private router: Router,
     private route: ActivatedRoute,
@@ -33,7 +37,7 @@ export class PlaceDetailComponent implements OnInit {
 
   ngOnInit() {
     this.data.currentMessage.subscribe(message => this.user = message);
-
+    this.id = +this.route.snapshot.paramMap.get('id');
   	this.getPlace();
   }
 
@@ -98,7 +102,8 @@ export class PlaceDetailComponent implements OnInit {
   }
 
   edit () {
-
+    this.editMode = true;
+    this.router.navigate(['/edit/' + this.route.snapshot.paramMap.get('id')]);
   }
 
   delete () {
@@ -111,26 +116,34 @@ export class PlaceDetailComponent implements OnInit {
   }
 
   favorites(): void {
-    if(this.favorite==false) {
+    if (this.favclick) { return; }
+    this.favclick = true;
+    this.favsuccess = true;
+    if (this.favorite === false) {
 
       this.serverService.addFav(this.user, this.route.snapshot.paramMap.get('id'))
         .subscribe(
           (res) => {
               console.log('success add favorite');
           }
+          , (error) => { this.favsuccess = false; }
         );
-
+       this.favstatus= 'Adding Success';
         this.favorite=true;
     } else {
 
       this.serverService.removeFav(this.user, this.route.snapshot.paramMap.get('id'))
         .subscribe(
           (res) => {
-              console.log('success add favorite')
+              console.log('success remove favorite');
           }
+          , (error) => { this.favsuccess = false; }
       );
-
+      this.favstatus= 'Removing Success';
       this.favorite=false;
     }
+    setTimeout(() => {
+      this.favclick = false;
+      }, 500);
   }
 }
