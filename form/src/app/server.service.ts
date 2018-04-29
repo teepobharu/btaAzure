@@ -165,8 +165,8 @@ export class ServerService {
 		return this.http.post('http://localhost:8000/api/createRoute', {route:route, date:date, user:user});
 	}
 
-	editPlace(place) {
-		return this.http.post('http://localhost:8000/api/editPlace', place);
+	editPlace(place,id) {
+		return this.http.post('http://localhost:8000/api/editPlace', {place:place, id:id});
 	}
 	// editName(id, nname, name) {
 	// 	return this.http.post('http://localhost:8000/api/editName/' , {id:id, name:name, nname:nname});

@@ -434,22 +434,25 @@ app.route('/api/token').post((req, res) => {
 app.route('/api/editPlace').post((req, res) => {
 	console.log(req.body);
 	con.query(`update attraction set 
-		name= '${req.body.placeName}',
-		operDate= '${req.body.operDay}',
-		operTime='${req.body.operTime}',
-		suggTime='${req.body.suggTime}',
-		cost='${req.body.cost}',
-		type='${req.body.type}',
-		zone='${req.body.area}',
-		transportation='${req.body.transportation}',
-		description='${req.body.description}',
-		lat='${req.body.lat}',
-		lng='${req.body.lat}',
+		name= '${req.body.place.placeName}',
+		operDate= '${req.body.place.operDay}',
+		operTime='${req.body.place.operTime}',
+		suggTime='${req.body.place.suggTime}',
+		cost='${req.body.place.cost}',
+		type='${req.body.place.type}',
+		zone='${req.body.place.area}',
+		transportation='${req.body.place.transportation}',
+		description='${req.body.place.description}',
+		lat='${req.body.place.lat}',
+		lng='${req.body.place.lng}',
 		validated='Y'
-				where attID = '${req.body.attID}'`, function (err, result, field) {
+				where attID = '${req.body.id}'`, function (err, result, field) {
 		if (err) console.log(err);
 		else { 
-			con.query(`select attID from attraction where name='${req.body.placeName}'`, function (err, result, field) {
+			console.log(result);
+			con.query(`select attID from attraction where name='${req.body.place.placeName}'`, function (err, result, field) {
+				console.log('result: attID ---------------------');
+				console.log(result);
 				res.send(result);
 			});;
 		}

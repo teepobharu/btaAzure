@@ -23,7 +23,7 @@
               <input type="text" id="placeName" class="form-control" [(ngModel)]="eplace.placeName" name="placeName" required>
             </div>
           </div>
-          <div class="col-sm-6">
+          <!-- <div class="col-sm-6">
             <button type="button" class="btn btn-link" style="margin: 23px 0px 0px -20px" (click)="addMoreName()"> More names</button>
           </div>
         </div>
@@ -51,7 +51,7 @@
               </label>
               <input type="text" id="placeName4" class="form-control" [(ngModel)]="eplace.placeName[2]" name="placeName4">
             </div>
-          </div>
+          </div> -->
         </div>
         <div class="col-sm-4">
           <div class="form-group">
@@ -127,13 +127,18 @@
           <div class="form-group">
             <label for="picture">Please upload pictures</label>
             <div style="margin-bottom: 10px;">
-              <img *ngFor="let url of urls" [src]="url" width="170" height="100" style="margin: 4px">
+              <img *ngFor="let url of urls" [src]="url" width="170" height="110" style="margin: 4px" >
+              
+               <i *ngIf="Upload" class="fa-rotate-180 material-icons" style="fontsize:10px; display: inline;">chevron_left chevron_left</i>
+              <img  [ngStyle]="{opacity: Upload? 0.4 : 0.7}"
+                    [src]="imageData" width="170" height="110" style="margin: 4px; display: inline;">
+              <small *ngIf="Upload" style="color:cornflowerblue; font-size: 1.5em ; opacity:0.7;">(Old)</small>
               <input type="file" multiple (change)="detectFiles($event)">
             </div>
           </div>
         </div>
         <button class="btn btn-primary" style="margin-left: 16px;" type="submit" [disabled]="!f.valid"> Submit </button>
-        <button class="btn btn-debug" type="button" (click)="upload()"> Reset </button>
+        <button class="btn btn-debug" type="button" (click)="onReset()"> Reset </button>
       </form>
     </div>
     <hr>

@@ -18,7 +18,7 @@ export class EditPlaceComponent implements OnInit {
   id: number;
   place: any;
   eplace = {
-    names: [],
+    //names: [],
     placeName: '',
     type: '',
     operDay: '',
@@ -27,18 +27,22 @@ export class EditPlaceComponent implements OnInit {
     area: '',
     cost: '',
     transportation: '',
-    description: ''
+    description: '',
+    lat: 1.0,
+    lng: 1.0
   };
   name = [];
 
   urls = new Array<string>();
   submitted = false;
-  moreName: boolean = false;
+  //moreName: boolean = false;
   filesToUpload: Array<File> = [];
 
   lat: any;
   lng: any;
   imageData: any;
+  Upload = false;
+
 
   constructor(
     private router: Router,
@@ -65,10 +69,10 @@ export class EditPlaceComponent implements OnInit {
     console.log('this.eplace');
     console.log(this.eplace);
   }
-  addMoreName() {
-    if(this.moreName==false) this.moreName = true;
-    else this.moreName = false;
-  }
+  // addMoreName() {
+  //   if(this.moreName==false) this.moreName = true;
+  //   else this.moreName = false;
+  // }
   getPlace() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.serverService.getPlace(id)
@@ -79,7 +83,7 @@ export class EditPlaceComponent implements OnInit {
           this.place = data;
           this.eplace = {
             placeName: this.place[0].name,
-            names: [],
+            //names: [],
             type: this.place[0].type.toLowerCase(),
             operDay: this.place[0].operDate,
             operTime: this.place[0].operTime,
@@ -87,7 +91,9 @@ export class EditPlaceComponent implements OnInit {
             area: this.place[0].zone,
             cost: this.place[0].cost,
             transportation: this.place[0].transportation,
-            description: this.place[0].description
+            description: this.place[0].description,
+            lat: parseFloat(this.place[0].lat),
+            lng: parseFloat(this.place[0].lng)
           };
         //   for(var i=0; i<this.eplace.names.length; i++) {
         //     if(this.eplace.names[i]!='') {
@@ -100,7 +106,7 @@ export class EditPlaceComponent implements OnInit {
         // //       }
         // // ,(error) => console.log('error')
         // // );
-          console.log(typeof(this.place[0]));
+        //console.log(typeof(this.place[0]));
           this.lat = parseFloat(this.place[0].lat);
           this.lng = parseFloat(this.place[0].lng);
         },
@@ -122,6 +128,9 @@ export class EditPlaceComponent implements OnInit {
   }
   onSubmit() {
     this.submitted = true;
+    this.editSubmit();
+  }
+  editSubmit() {
     this.place.placeName = this.addPlaceForm.value.placeName;
     this.place.type = this.addPlaceForm.value.type;
     this.place.operDay = this.addPlaceForm.value.operDay;
@@ -136,13 +145,14 @@ export class EditPlaceComponent implements OnInit {
     this.name.push(this.addPlaceForm.value.placeName2);
     this.name.push(this.addPlaceForm.value.placeName3);
     this.name.push(this.addPlaceForm.value.placeName4);
+    this.eplace.lng = this.lng;
+    this.eplace.lat = this.lat;
 
-    this.serverService.editPlace(this.place)
+    this.serverService.editPlace(this.eplace, this.route.snapshot.paramMap.get('id'))
       .subscribe(
           (res) => {
-            console.log(res.json()[0].attID),
+            console.log(res.json()[0]),
         this.upload(res.json()[0].attID);
-        console.log(this.eplace.names);
         //  for(var i=1; i<this.name.length; i++) {
         //    if(this.name[i]!='') this.serverService.editName(this.place[0].attID, this.eplace.names[i],this.place[0]);
         //  }
@@ -164,6 +174,7 @@ export class EditPlaceComponent implements OnInit {
         reader.readAsDataURL(file);
       }
           console.log(this.urls);
+          this.Upload = true;
     }
   }
   setName(i, att) {
@@ -183,7 +194,9 @@ export class EditPlaceComponent implements OnInit {
     console.log('form data variable :   '+ formData.toString());
     this.serverService.uploadImage(id, formData)
         .subscribe(files => {
-          this.router.navigate(['/admin/places']);
+          if (this.submitted) {
+            this.router.navigate(['/admin/places']);
+          }
           alert("Success adding the place");
         });
   }
@@ -191,11 +204,13 @@ export class EditPlaceComponent implements OnInit {
     this.router.navigate(['/admin/places']);
   }
   reviewChange() {
-    this.onSubmit();
+    this.editSubmit();
     this.router.navigate(['/detail/' + this.route.snapshot.paramMap.get('id')]);
   }
   onReset() {
     this.submitted = false;
+    this.Upload = false;
+    this.urls = [];
     this.addPlaceForm.reset();
   }
 }
