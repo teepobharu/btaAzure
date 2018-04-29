@@ -2,6 +2,7 @@
 	<div class="row">
     	<div class="col-xs-12 col-sm-10 col-md-12 col-sm-offset-0 col-md-offset-0">
     		<h1>Welcome,</h1>
+				<button class="btn btn-danger" routerLink="/" (click)="signOut()" type="button" style="margin: 5px; font-size: 18px;">Logout</button>
     		<hr>
         	<div class="col-sm-5">
         		<h3>Favorites</h3>
@@ -18,7 +19,7 @@
 			                <h4 style="/*position: absolute; */text-align: left;">{{ place.name }}</h4>
 			                <!-- <img [src]="place.img" style="width: 100%;"> -->
 			              </a>
-			              
+
 			                <!-- <p style="line-height: 25px; height: 75px; overflow: hidden; text-overflow: ellipsis">{{ place.description }}</p> -->
 			            </div>
 			        </div>

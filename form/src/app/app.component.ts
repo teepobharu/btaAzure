@@ -10,6 +10,11 @@ import { ServerService }       from './server.service';
 export class AppComponent implements OnInit{
   title = 'Bangkok Traveling Assistance';
 
+  brightDoH: any;
+  brightDoD: any;
+  brightDoR: any;
+  brightDoE: any;
+  brightDoL: any;
 	message: string;
 	user: string;
 
@@ -23,8 +28,44 @@ export class AppComponent implements OnInit{
   	})
   }
 
+  onClickH(){
+      this.brightDoH = "active";
+      this.brightDoD = "";
+      this.brightDoR = "";
+      this.brightDoE = "";
+      this.brightDoL = "";
+  }
+  onClickD(){
+      this.brightDoD = "active";
+      this.brightDoH = "";
+      this.brightDoR = "";
+      this.brightDoE = "";
+      this.brightDoL = "";
+  }
+  onClickR(){
+      this.brightDoR = "active";
+      this.brightDoH = "";
+      this.brightDoD = "";
+      this.brightDoE = "";
+      this.brightDoL = "";
+  }
+  onClickE(){
+    this.brightDoE = "active";
+    this.brightDoH = "";
+    this.brightDoD = "";
+    this.brightDoR = "";
+    this.brightDoL = "";
+  }
+  onClickL(){
+    this.brightDoL = "active";
+    this.brightDoH = "";
+    this.brightDoD = "";
+    this.brightDoR = "";
+    this.brightDoE = "";
+  }
+
   getUser() {
-  	this.serverService.getUser(this.message) 
+  	this.serverService.getUser(this.message)
   	.subscribe((res) => this.user = res.json()[0].name);
   }
 }

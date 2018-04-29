@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataService } from "../data.service";
 import { ServerService }  from '../server.service';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser'; 
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +13,7 @@ export class ProfileComponent implements OnInit {
   routes= [];
   imageData: any;
   user: string = '';
+  message: string = '';
 
   constructor(
     private serverService: ServerService,
@@ -35,12 +36,12 @@ export class ProfileComponent implements OnInit {
                   this.callImage(i);
           }
 
-        }, 
+        },
           (error) => {
             console.log('error');
           }
         );
-        
+
         this.serverService.listWtr(this.user)
         .subscribe(
 	        (res) => {
@@ -66,13 +67,22 @@ export class ProfileComponent implements OnInit {
 	                  this.isRated(i);
 	          }
 
-	        }, 
+	        },
 	          (error) => {
 	            console.log('error');
 	          }
 	        );
-        
+
   }
+
+  signOut() {
+      var auth2 = gapi.auth2.getAuthInstance();
+      this.message = 'Login';
+      this.data.changeMessage(this.message);
+      auth2.signOut().then(function () {
+        console.log('User signed out.');
+      });
+    }
 
   isRated(id) {
   	this.serverService.isRated(this.user, this.routes[id][0].routeID)
