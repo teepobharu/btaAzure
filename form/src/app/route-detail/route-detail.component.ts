@@ -116,7 +116,7 @@ export class RouteDetailComponent implements OnInit {
           this.imageData = this.sanitizer.bypassSecurityTrustUrl(
              urlCreator.createObjectURL(blob));
           this.route[i]['img'] = this.imageData;
-          this.route[i]['time'] = i+1;
+          this.route[i]['Time'] = i+1;
   	      this.isModify[i] = false;
   				console.log(this.route);
           this.locationChosen=false;
