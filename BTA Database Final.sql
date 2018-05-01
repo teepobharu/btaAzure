@@ -2,40 +2,23 @@
 -- version 4.7.7
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Apr 28, 2018 at 12:42 PM
+-- Host: localhost:8889
+-- Generation Time: May 01, 2018 at 04:59 PM
 -- Server version: 5.6.38
--- PHP Version: 7.2.1
+-- PHP Version: 7.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
---
--- Database: `BTA2`
---
 
--- --------------------------------------------------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Table structure for table `attraction`
+-- Database: `BTA`
 --
-
-CREATE TABLE `attraction` (
-  `attID` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  `operDate` varchar(128) NOT NULL,
-  `operTime` varchar(256) NOT NULL,
-  `suggTime` varchar(256) DEFAULT NULL,
-  `cost` varchar(256) DEFAULT NULL,
-  `type` varchar(16) NOT NULL,
-  `zone` varchar(16) NOT NULL,
-  `transportation` varchar(256) DEFAULT NULL,
-  `description` text,
-  `validated` varchar(1) NOT NULL,
-  `imgSrc` varchar(100) NOT NULL,
-  `lat` float(10,6) NOT NULL,
-  `lng` float(10,6) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `attraction`
@@ -70,17 +53,6 @@ INSERT INTO `attraction` (`attID`, `name`, `operDate`, `operTime`, `suggTime`, `
 (30, 'Pipit Banglamphu', 'Tuesday - Sunday', '10.00AM-6.00PM', '1.5 hours for visiting', 'Free', 'Museum', 'Chaopraya', NULL, 'Pipit Bang Lamphu Museum is composed of two L-shaped buildings. The buildings were constructed in 1925 and once served as the Wat Sangwet Printing School. The museum presents local ways of life, historical sites and traditions of the Bang Lamphu community.', 'Y', 'pipit.jpeg', 13.763534, 100.496452),
 (36, 'Central Rama III', 'e', 'e', 'e', 'free', 'Shopping', 'rama 3', 'BUS Available \r\n102,180, 22,67,77\r\n', 'eeeee', 'Y', 'bangkok-on-a-budget.jpg', 13.697567, 100.537582);
 
--- --------------------------------------------------------
-
---
--- Table structure for table `attraction_name`
---
-
-CREATE TABLE `attraction_name` (
-  `attID` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Dumping data for table `attraction_name`
 --
@@ -109,6 +81,7 @@ INSERT INTO `attraction_name` (`attID`, `name`) VALUES
 (21, 'Museum of Siam'),
 (22, 'Dusit Zoo'),
 (23, 'Chulalongkorn University'),
+(23, 'undefined'),
 (27, 'Bangkok Christian College'),
 (28, 'Tha Maharaj'),
 (29, 'Phra Sumen Fort'),
@@ -117,18 +90,6 @@ INSERT INTO `attraction_name` (`attID`, `name`) VALUES
 (36, 'my home'),
 (36, 'Rama 3');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `contains`
---
-
-CREATE TABLE `contains` (
-  `attID` int(11) NOT NULL,
-  `Time` int(1) NOT NULL,
-  `routeID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Dumping data for table `contains`
 --
@@ -136,144 +97,69 @@ CREATE TABLE `contains` (
 INSERT INTO `contains` (`attID`, `Time`, `routeID`) VALUES
 (1, 4, 1),
 (1, 3, 2),
-(1, 83000, 10),
+(1, 1, 10),
+(1, 4, 11),
+(1, 3, 12),
 (2, 5, 1),
 (2, 5, 2),
-(2, 103000, 9),
+(2, 2, 9),
+(2, 5, 11),
+(2, 5, 12),
 (3, 1, 4),
-(3, 160000, 8),
+(3, 2, 8),
 (4, 3, 3),
 (4, 2, 4),
 (4, 4, 5),
-(4, 100000, 7),
 (5, 1, 1),
 (5, 3, 6),
-(5, 153000, 9),
+(5, 4, 9),
+(5, 1, 11),
 (6, 2, 3),
 (6, 3, 5),
 (8, 4, 2),
-(8, 103000, 10),
+(8, 2, 10),
+(8, 4, 12),
 (9, 2, 1),
 (9, 1, 2),
-(9, 133000, 9),
-(10, 180000, 7),
+(9, 3, 9),
+(9, 2, 11),
+(9, 1, 12),
 (12, 6, 6),
 (13, 5, 6),
 (15, 1, 3),
-(16, 163000, 7),
 (17, 3, 4),
 (18, 5, 3),
 (20, 4, 3),
 (20, 1, 5),
-(20, 83000, 7),
-(20, 80000, 9),
+(20, 1, 9),
 (21, 3, 1),
 (21, 2, 2),
 (21, 4, 6),
-(21, 140000, 10),
-(22, 90000, 8),
+(21, 3, 10),
+(21, 3, 11),
+(21, 2, 12),
+(22, 1, 8),
 (23, 2, 5),
-(23, 150000, 7),
 (28, 6, 2),
+(28, 6, 12),
 (29, 1, 6),
 (30, 2, 6),
-(30, 163000, 10);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `events`
---
-
-CREATE TABLE `events` (
-  `attID` int(11) NOT NULL,
-  `name` varchar(128) NOT NULL,
-  `operDate` varchar(128) NOT NULL,
-  `operTime` varchar(256) NOT NULL,
-  `suggTime` varchar(256) DEFAULT NULL,
-  `cost` varchar(256) DEFAULT NULL,
-  `type` varchar(16) NOT NULL,
-  `zone` varchar(16) NOT NULL,
-  `transportation` varchar(256) DEFAULT NULL,
-  `description` text,
-  `startDate` date NOT NULL,
-  `endDate` date NOT NULL,
-  `validated` varchar(1) NOT NULL,
-  `imgSrc` varchar(100) NOT NULL,
-  `lat` float NOT NULL,
-  `lng` float NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(30, 4, 10);
 
 --
 -- Dumping data for table `events`
 --
 
 INSERT INTO `events` (`attID`, `name`, `operDate`, `operTime`, `suggTime`, `cost`, `type`, `zone`, `transportation`, `description`, `startDate`, `endDate`, `validated`, `imgSrc`, `lat`, `lng`) VALUES
-(6, 'Intania Fair', '', 'ewq', '', 'ww', 'Business', 'ww', 'w', 'www', '2018-04-06', '2018-05-09', 'Y', '138621_Fig_03.png', 0, 0);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `favorite`
---
-
-CREATE TABLE `favorite` (
-  `uid` int(11) NOT NULL,
-  `attID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(6, 'Intania Fair', 'Weekdays', '16.00 - 20.00', '17.00-19.00', 'free', 'Business', 'Bangkok', 'BTS Siam Exit 2', 'Food & Beverage', '2018-04-06', '2018-05-09', 'Y', 'intania.jpg', 0, 0);
 
 --
 -- Dumping data for table `favorite`
 --
 
 INSERT INTO `favorite` (`uid`, `attID`) VALUES
-(1, 2),
+(1, 15),
 (1, 16);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `preference`
---
-
-CREATE TABLE `preference` (
-  `prefID` int(11) NOT NULL,
-  `nationality` varchar(256) NOT NULL,
-  `gender` varchar(8) NOT NULL,
-  `likes` varchar(32) NOT NULL,
-  `notlikes` varchar(32) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `preference`
---
-
-INSERT INTO `preference` (`prefID`, `nationality`, `gender`, `likes`, `notlikes`) VALUES
-(1, '', '', '', ''),
-(2, '', '', '', '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `related_to`
---
-
-CREATE TABLE `related_to` (
-  `prefID` int(11) NOT NULL,
-  `routeID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `route`
---
-
-CREATE TABLE `route` (
-  `routeID` int(11) NOT NULL,
-  `noplace` tinyint(4) NOT NULL,
-  `type1` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `route`
@@ -286,55 +172,26 @@ INSERT INTO `route` (`routeID`, `noplace`, `type1`) VALUES
 (4, 3, 'Shopping along the BTS'),
 (5, 4, ''),
 (6, 6, 'Boat along Chaopraya River'),
-(7, 5, ''),
 (8, 2, 'Zoo and shopping'),
 (9, 4, ''),
-(10, 4, '');
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `uid` int(11) NOT NULL,
-  `name` varchar(256) NOT NULL,
-  `dateIn` date NOT NULL,
-  `email` varchar(256) DEFAULT NULL,
-  `birthdate` date NOT NULL,
-  `gender` varchar(8) NOT NULL,
-  `prefID` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+(10, 4, ''),
+(11, 5, ''),
+(12, 6, '');
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uid`, `name`, `dateIn`, `email`, `birthdate`, `gender`, `prefID`) VALUES
-(1, 'Phumin Aphichaichatchaval', '2018-04-21', 'phumin.aph@gmail.com', '2018-04-01', 'Male', 1),
-(2, 'Chan', '2018-04-21', 'Chigachan', '2017-11-28', 'Male', 2),
-(3, 'Karn', '2018-04-21', 'karnnykarn@gmail.com', '2017-06-08', 'None', 2),
-(4, 'Nonny', '2018-04-21', 'Nonnyeang@chula.student', '2015-07-02', 'Male', 1),
-(5, 'Chim', '2018-04-21', 'Chimchim', '2014-03-14', 'Male', 1),
-(6, 'Chalee', '2018-04-21', 'Chalee.lee@gmail.com', '2014-04-19', 'Male', 1),
-(7, 'Mark', '2018-04-21', 'Marki@gail.com', '2012-09-12', 'Male', 2),
-(29, 'Phumin Aphichaichatchaval', '0000-00-00', 'peach.aph@gmail.com', '0000-00-00', '', 1),
-(30, 'Chan Pichitwattana', '0000-00-00', 'chan.pichitwattana@gmail.com', '0000-00-00', '', 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `went_to_attraction`
---
-
-CREATE TABLE `went_to_attraction` (
-  `uid` int(11) NOT NULL,
-  `attID` int(11) NOT NULL,
-  `feedback` text NOT NULL,
-  `date` date NOT NULL,
-  `rating` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `users` (`uid`, `name`, `email`) VALUES
+(1, 'Phumin Aphichaichatchaval', 'phumin.aph@gmail.com'),
+(2, 'Chan', 'Chigachan'),
+(3, 'Karn', 'karnnykarn@gmail.com'),
+(4, 'Nonny', 'Nonnyeang@chula.student'),
+(5, 'Chim', 'Chimchim'),
+(6, 'Chalee', 'Chalee.lee@gmail.com'),
+(7, 'Mark', 'Marki@gail.com'),
+(29, 'Phumin Aphichaichatchaval', 'peach.aph@gmail.com'),
+(30, 'Chan Pichitwattana', 'chan.pichitwattana@gmail.com');
 
 --
 -- Dumping data for table `went_to_attraction`
@@ -365,179 +222,15 @@ INSERT INTO `went_to_attraction` (`uid`, `attID`, `feedback`, `date`, `rating`) 
 (6, 2, 'Regal though crowded.\r\nHere all that glitters is indeed gold or gold plated and very artistic. However the chief attraction itself ie the Emerald Buddha ( though made of jade) was rather underwhelming as it was much too small and placed too high up to be properly visible. The whole place was also packed with tourists as it was the high season (late December) and so we had to jostle and queue to see every sight. \r\nBe mindful of the modest attire required at most Thai sites otherwise you’ll need to get the brightly patterned Thai pyjamas that seem like the standard uniform of most tourists.', '2018-04-21', '100'),
 (7, 2, 'Highlights of Thailand\r\nThere are many temples in Thailand and in Bangkok to visit. They are all unique and interesting. The Temple of the Emerald Buddha was interesting and attractive. The grounds around the temple also are worth a visit.', '2018-04-27', '90');
 
--- --------------------------------------------------------
-
---
--- Table structure for table `went_to_route`
---
-
-CREATE TABLE `went_to_route` (
-  `routeID` int(11) NOT NULL,
-  `uID` int(11) NOT NULL,
-  `feedback` text NOT NULL,
-  `date` date NOT NULL,
-  `rating` varchar(256) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
 --
 -- Dumping data for table `went_to_route`
 --
 
 INSERT INTO `went_to_route` (`routeID`, `uID`, `feedback`, `date`, `rating`) VALUES
-(1, 1, 'd', '2018-04-26', '80'),
+(1, 1, '', '2018-04-26', ''),
 (4, 1, 'hey', '2018-04-18', '80'),
 (6, 1, 'Nice', '2018-04-03', '90');
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `attraction`
---
-ALTER TABLE `attraction`
-  ADD PRIMARY KEY (`attID`);
-
---
--- Indexes for table `attraction_name`
---
-ALTER TABLE `attraction_name`
-  ADD PRIMARY KEY (`attID`,`name`);
-
---
--- Indexes for table `contains`
---
-ALTER TABLE `contains`
-  ADD PRIMARY KEY (`attID`,`routeID`),
-  ADD KEY `routeID` (`routeID`);
-
---
--- Indexes for table `events`
---
-ALTER TABLE `events`
-  ADD PRIMARY KEY (`attID`);
-
---
--- Indexes for table `favorite`
---
-ALTER TABLE `favorite`
-  ADD PRIMARY KEY (`uid`,`attID`),
-  ADD KEY `attID` (`attID`);
-
---
--- Indexes for table `preference`
---
-ALTER TABLE `preference`
-  ADD PRIMARY KEY (`prefID`);
-
---
--- Indexes for table `related_to`
---
-ALTER TABLE `related_to`
-  ADD PRIMARY KEY (`prefID`,`routeID`),
-  ADD KEY `routeID` (`routeID`);
-
---
--- Indexes for table `route`
---
-ALTER TABLE `route`
-  ADD PRIMARY KEY (`routeID`);
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`uid`),
-  ADD KEY `user_ibfk_1` (`prefID`);
-
---
--- Indexes for table `went_to_attraction`
---
-ALTER TABLE `went_to_attraction`
-  ADD PRIMARY KEY (`uid`,`attID`),
-  ADD KEY `attID` (`attID`);
-
---
--- Indexes for table `went_to_route`
---
-ALTER TABLE `went_to_route`
-  ADD PRIMARY KEY (`routeID`,`uID`),
-  ADD KEY `uID` (`uID`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `attraction`
---
-ALTER TABLE `attraction`
-  MODIFY `attID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
---
--- AUTO_INCREMENT for table `events`
---
-ALTER TABLE `events`
-  MODIFY `attID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT for table `preference`
---
-ALTER TABLE `preference`
-  MODIFY `prefID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT for table `route`
---
-ALTER TABLE `route`
-  MODIFY `routeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `uid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `attraction_name`
---
-ALTER TABLE `attraction_name`
-  ADD CONSTRAINT `attraction_name_ibfk_1` FOREIGN KEY (`attID`) REFERENCES `attraction` (`attID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `favorite`
---
-ALTER TABLE `favorite`
-  ADD CONSTRAINT `favorite_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `favorite_ibfk_2` FOREIGN KEY (`attID`) REFERENCES `attraction` (`attID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `related_to`
---
-ALTER TABLE `related_to`
-  ADD CONSTRAINT `related_to_ibfk_1` FOREIGN KEY (`prefID`) REFERENCES `preference` (`prefID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `related_to_ibfk_2` FOREIGN KEY (`routeID`) REFERENCES `route` (`routeID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `users`
---
-ALTER TABLE `users`
-  ADD CONSTRAINT `user_ibfk_1` FOREIGN KEY (`prefID`) REFERENCES `preference` (`prefID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `went_to_attraction`
---
-ALTER TABLE `went_to_attraction`
-  ADD CONSTRAINT `went_to_attraction_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `went_to_attraction_ibfk_2` FOREIGN KEY (`attID`) REFERENCES `attraction` (`attID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints for table `went_to_route`
---
-ALTER TABLE `went_to_route`
-  ADD CONSTRAINT `went_to_route_ibfk_1` FOREIGN KEY (`routeID`) REFERENCES `route` (`routeID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `went_to_route_ibfk_2` FOREIGN KEY (`uID`) REFERENCES `users` (`uid`) ON DELETE CASCADE ON UPDATE CASCADE;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
