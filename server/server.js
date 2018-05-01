@@ -111,7 +111,7 @@ app.route('/api/getPlace').post((req, res) => {
 
 app.route('/api/getEvent').post((req, res) => {
 	console.log(req.body);
-	con.query(`select * from events where attID='${req.body.id}' and validated='Y'`, function (err, result, field) {
+	con.query(`select * from events where attID='${req.body.id}'`, function (err, result, field) {
 		if (err) console.log(err);
 		//console.log(result);
 		res.send(result);
@@ -165,7 +165,7 @@ app.route('/api/listPlaces').post((req, res) => {
 
 app.route('/api/listEvents').get((req, res) => {
 	console.log(req.body);
-	con.query(`select * from events`, function (err, result, field) {
+	con.query(`select * from events where validated='Y'`, function (err, result, field) {
 		if (err) console.log(err);
 		res.send(result);
 	});;
@@ -332,6 +332,7 @@ app.route('/api/commentRoute').post((req, res) => {
 	console.log(req.body);
 	con.query(`update went_to_route set feedback='${req.body.cmt}', rating='${req.body.rate}' where uID='${req.body.uid}' and routeID='${req.body.rid}'`, function (err, result, field) {
 		if (err) console.log(err);
+		res.send(result);
 	});;
 });
 
