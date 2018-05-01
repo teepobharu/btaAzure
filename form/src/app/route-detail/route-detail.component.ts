@@ -3,6 +3,7 @@ import { ServerService }       from '../server.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { DataService } from "../data.service";
+import * as jsPDF from 'jspdf';
 
 
 @Component({
@@ -167,11 +168,53 @@ export class RouteDetailComponent implements OnInit {
   exportPDF() {
   	console.log('here');
     console.log(this.route);
-    this.serverService.createRoute(this.route, this.routed.snapshot.paramMap.get('date'), this.user)
-    .subscribe(
-      (res) => {
-          alert('Success');
-      }
-      );
+    // this.serverService.createRoute(this.route, this.routed.snapshot.paramMap.get('date'), this.user)
+    // .subscribe(
+    //   (res) => {
+    //       alert('Success');
+    //   }
+    //   );
+    var doc = new jsPDF();
+        doc.setFont("helvetica");
+        doc.setFontSize(24);
+        doc.text(20, 20, 'Overview of your route on '+ this.routed.snapshot.paramMap.get('date'));
+        doc.setFontSize(14);
+        for (var i=0; i<this.route.length;i++) {
+          doc.text(30, 35+10*(i), this.route[i].Time+'. '+this.route[i].name);
+        }
+
+        for (var z=0; z<this.route.length;z++) {
+          doc.addPage();
+          doc.setFontSize(24);
+          doc.text(20, 20, this.route[z].Time+'. '+this.route[z].name);
+          doc.setFontType("bold");
+          doc.setFontSize(14);
+          doc.text(20, 30, 'Type')
+          doc.text(80, 30, 'Area')
+          doc.text(140, 30, 'Cost')
+          doc.text(20, 50, 'Operating Day')
+          doc.text(80, 50, 'Operating Time')
+          doc.text(140, 50, 'Suggested Time')
+          doc.text(20, 70, 'Transportation')
+          doc.setFontType("normal");
+          doc.setFontSize(12);
+          doc.text(20, 37, this.route[z].type)
+          doc.text(80, 37, this.route[z].zone)
+          doc.text(140, 37, this.route[z].cost)
+          doc.text(20, 57, this.route[z].operDate)
+          doc.text(80, 57, this.route[z].operTime)
+          doc.text(140, 57, this.route[z].suggTime)
+          doc.text(20, 77, this.route[z].transportation)
+          doc.setFontType("bold");
+          doc.setFontSize(14);
+          doc.text(20, 120, 'Description')
+          doc.setFontType("normal");
+          doc.setFontSize(12);
+          var splitTitle = doc.splitTextToSize(this.route[z].description, 180);
+          doc.text(20, 127, splitTitle);
+        }
+
+        // Save the PDF
+        doc.save('Your Route.pdf');
   }
 }
