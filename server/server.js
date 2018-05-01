@@ -111,7 +111,7 @@ app.route('/api/getPlace').post((req, res) => {
 
 app.route('/api/getEvent').post((req, res) => {
 	console.log(req.body);
-	con.query(`select * from events where attID='${req.body.id}' and validated='Y'`, function (err, result, field) {
+	con.query(`select * from events where attID='${req.body.id}'`, function (err, result, field) {
 		if (err) console.log(err);
 		//console.log(result);
 		res.send(result);
@@ -129,7 +129,7 @@ app.route('/api/getComments/:id').get((req, res) => {
 
 app.route('/api/getRoute/:id').get((req, res) => {
 	console.log(req.body);
-	con.query(`select * from contains join attraction on contains.attID=attraction.attID where routeID='${req.params.id}' order by time`, function (err, result, field) {
+	con.query(`select contains.attID, name, time, description, lat, lng from contains join attraction on contains.attID=attraction.attID where routeID='${req.params.id}' order by time`, function (err, result, field) {
 		if (err) console.log(err);
 		console.log(result);
 		res.send(result);
@@ -167,15 +167,14 @@ app.route('/api/listEvents').get((req, res) => {
 	console.log(req.body);
 	con.query(`select * from events`, function (err, result, field) {
 		if (err) console.log(err);
+		//console.log(result);
 		res.send(result);
 	});;
 });
 
 app.route('/api/findPlace').post((req, res) => {
 	console.log(req.body);
-	con.query(`select attID from attraction 
-				where name='${req.body.searchKey}' 
-				and validated='Y'`, function (err, result, field) {
+	con.query(`select attID from attraction where name='${req.body.searchKey}' and validated='Y'`, function (err, result, field) {
 		if (err) console.log(err);
 		//console.log(result);
 		res.send(result);

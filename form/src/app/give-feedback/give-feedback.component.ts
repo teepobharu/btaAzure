@@ -84,8 +84,8 @@ export class GiveFeedbackComponent implements OnInit {
   	console.log(this.comments[0]);
   	this.serverService.commentRoute(this.user, this.routed.snapshot.paramMap.get('id'), this.rate[0]*10, this.comments[0])
   	.subscribe(
-  		(res) => {alert('Your feedback is successfully submitted.');
-      this.router.navigate(['/profile']);}
+  		(res) => alert('Your feedback is successfully submitted.');
+      this.router.navigate(['/profile']);
   		);
   }
 }

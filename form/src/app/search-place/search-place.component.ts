@@ -85,8 +85,7 @@ export class SearchPlaceComponent implements OnInit {
 
         let urlCreator = window.URL;
           this.imageData = this.sanitizer.bypassSecurityTrustUrl(
-             urlCreator.createObjectURL(blob)
-          );
+             urlCreator.createObjectURL(blob));
           this.places[count]['img'] = this.imageData;
         });
   }
@@ -99,6 +98,7 @@ export class SearchPlaceComponent implements OnInit {
 	      .subscribe(
 	          (res) => {
 		          const data = res.json();
+		          //this.places = data;
 		          console.log(data.length);
 		          if (data.length > 0) {
 		          	const id = data[0].attID;
@@ -109,5 +109,5 @@ export class SearchPlaceComponent implements OnInit {
 	          	  console.log('err');
 	           }
 	      );
-    }
+  }
 }
