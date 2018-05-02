@@ -165,7 +165,7 @@ app.route('/api/listPlaces').post((req, res) => {
 
 app.route('/api/listEvents').get((req, res) => {
 	console.log(req.body);
-	con.query(`select * from events where validated='Y'`, function (err, result, field) {
+	con.query(`select * from events where validated='Y' and datediff(endDate, sysdate())>=0 and datediff(sysdate(), startDate)>=0`, function (err, result, field) {
 		if (err) console.log(err);
 		res.send(result);
 	});;
@@ -273,7 +273,13 @@ app.get('/eventpic/:id', function(req, res) {
 
 app.route('/api/relatedPlaces/:id').get((req, res) => {
 	console.log(req.body);
-	con.query(`select attID, name from attraction where type=(select type from attraction where attID = '${req.params.id}') and not attID = '${req.params.id}' and validated='Y' order by name`, function (err, result, field) {
+	con.query(`select attID, name 
+				from attraction 
+				where type=(select type from attraction 
+							where attID = '${req.params.id}') 
+						and not attID = '${req.params.id}' 
+						and validated='Y' 
+						order by name`, function (err, result, field) {
 		if (err) console.log(err);
 		console.log(result);
 		res.send(result);
