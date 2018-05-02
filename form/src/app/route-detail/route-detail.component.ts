@@ -168,12 +168,12 @@ export class RouteDetailComponent implements OnInit {
   exportPDF() {
   	console.log('here');
     console.log(this.route);
-    // this.serverService.createRoute(this.route, this.routed.snapshot.paramMap.get('date'), this.user)
-    // .subscribe(
-    //   (res) => {
-    //       alert('Success');
-    //   }
-    //   );
+    this.serverService.createRoute(this.route, this.routed.snapshot.paramMap.get('date'), this.user)
+    .subscribe(
+      (res) => {
+          alert('Success');
+      }
+    );
     var doc = new jsPDF();
         doc.setFont("helvetica");
         doc.setFontSize(24);
