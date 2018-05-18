@@ -116,7 +116,7 @@ export class RouteDetailComponent implements OnInit {
           this.imageData = this.sanitizer.bypassSecurityTrustUrl(
              urlCreator.createObjectURL(blob));
           this.route[i]['img'] = this.imageData;
-          this.route[i]['time'] = i+1;
+          this.route[i]['Time'] = i+1;
   	      this.isModify[i] = false;
   				console.log(this.route);
           this.locationChosen=false;
@@ -168,12 +168,12 @@ export class RouteDetailComponent implements OnInit {
   exportPDF() {
   	console.log('here');
     console.log(this.route);
-    // this.serverService.createRoute(this.route, this.routed.snapshot.paramMap.get('date'), this.user)
-    // .subscribe(
-    //   (res) => {
-    //       alert('Success');
-    //   }
-    //   );
+    this.serverService.createRoute(this.route, this.routed.snapshot.paramMap.get('date'), this.user)
+    .subscribe(
+      (res) => {
+          alert('Success');
+      }
+    );
     var doc = new jsPDF();
         doc.setFont("helvetica");
         doc.setFontSize(24);
@@ -200,11 +200,13 @@ export class RouteDetailComponent implements OnInit {
           doc.setFontSize(12);
           doc.text(20, 37, this.route[z].type)
           doc.text(80, 37, this.route[z].zone)
-          doc.text(140, 37, this.route[z].cost)
+          var splitTitle = doc.splitTextToSize(this.route[z].cost, 50);
+          doc.text(140, 37, splitTitle);
           doc.text(20, 57, this.route[z].operDate)
           doc.text(80, 57, this.route[z].operTime)
           doc.text(140, 57, this.route[z].suggTime)
-          doc.text(20, 77, this.route[z].transportation)
+          var splitTitle = doc.splitTextToSize(this.route[z].transportation, 180);
+          doc.text(20, 77, splitTitle);
           doc.setFontType("bold");
           doc.setFontSize(14);
           doc.text(20, 120, 'Description')

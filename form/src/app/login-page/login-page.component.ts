@@ -20,7 +20,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   private myClientId: string = '726620124773-ldsc11opkl7c0fsi3b5gnjum03jdsjmd.apps.googleusercontent.com';
- 
+
   onGoogleSignInSuccess(event: GoogleSignInSuccess) {
     let googleUser: gapi.auth2.GoogleUser = event.googleUser;
     let id: string = googleUser.getId();
