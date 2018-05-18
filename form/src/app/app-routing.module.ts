@@ -31,6 +31,7 @@ const routes: Routes = [
   { path: 'routeinfo', component: RouteInfoComponent },
   { path: 'routedetail/:id/:date', component: RouteDetailComponent },
   { path: 'admin/main', component: AdminMainComponent },
+  { path: 'admin', component: AdminMainComponent, pathMatch: 'full' },
   { path: 'admin/places', component: AdminPlacesComponent },
   { path: 'admin/events', component: AdminEventsComponent },
   { path: 'login', component: LoginPageComponent },
